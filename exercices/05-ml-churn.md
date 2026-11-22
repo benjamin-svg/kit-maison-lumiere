@@ -76,8 +76,8 @@ et on note la photo du jour.
 - L'auditeur a nommé la colonne fautive, avec une preuve chiffrée.
 - Sans cette colonne, les résultats sont nettement moins bons qu'à l'étape 3 (où presque tout était juste).
 - Liste de même taille que la règle (environ 2 990 clients) : précision d'environ 92 % pour les deux.
-- Parmi les 1 000 clients récents (moins de 270 jours) les plus à risque : environ 740 vrais perdus pour le modèle,
-  environ 690 en les classant par ancienneté du dernier achat, environ 380 au hasard.
+- Parmi les 1 000 clients récents (moins de 270 jours) les plus à risque : 730 à 745 vrais perdus pour le modèle
+  (selon les variables retenues), environ 690 en les classant par ancienneté du dernier achat, environ 380 au hasard.
 - `VALIDATION.md` compare le modèle et la règle sur la même population et le même test, et cite le biais d'anonymisation dans les limites.
 - `ciblage.csv` contient 1 000 lignes, aucun client anonymisé, aucun client hors de la population demandée,
   et les récences sont calculées au 31/12/2025.
