@@ -1,8 +1,8 @@
-# Exercice 00 - Prise en main de Claude Code et de Claude Code Desktop
+# Exercice 00 - Prise en main de Claude Code et de Claude Desktop (onglet Code)
 
 ## Objectif
 
-Savoir ouvrir le kit dans Claude Code (terminal) et dans Claude Code Desktop, et reconnaître les briques
+Savoir ouvrir le kit dans Claude Code (terminal) et dans Claude Desktop (onglet Code), et reconnaître les briques
 qui rendent Claude utile et sûr sur un projet : le fichier `CLAUDE.md`, le mode plan, le retour en arrière
 (`/rewind`), une skill, un sous-agent et un hook.
 
@@ -111,9 +111,9 @@ vous-même `uv run python outils/tester_hooks.py` pour lire les messages du hook
 Si Claude propose un autre moyen (par exemple `rm -r` sans `-f`, qui n'est pas bloqué), refusez
 et discutez-en : un hook ne bloque que ce qu'il sait reconnaître.
 
-## Étape 8 - Le même kit dans Claude Code Desktop (5 min, en autonomie)
+## Étape 8 - Le même kit dans Claude Desktop, onglet Code (5 min, en autonomie)
 
-Ouvrez Claude Code Desktop, choisissez le dossier du kit, et redonnez la consigne de l'étape 1.
+Ouvrez Claude Desktop (onglet Code), choisissez le dossier du kit, et redonnez la consigne de l'étape 1.
 **À observer** : mêmes consignes, mêmes skills, mêmes hooks ; la relecture des modifications se fait dans
 une vue des différences plus confortable.
 
@@ -122,7 +122,8 @@ une vue des différences plus confortable.
 - Étape 5 : **2 573** commandes web non annulées en décembre 2025, confirmées par le vérificateur.
   Si vous trouvez 2 737, les commandes annulées ont été comptées.
 - `travail/<prénom>/analyses/` contient un dossier avec `requete.sql`, `resultat.csv` et `NOTE.md`.
-- `git status` ne montre aucun changement dans `donnees/` ni dans `CLAUDE.md` (commité à l'étape 2).
+- `git status` ne montre aucun changement dans `donnees/`. `CLAUDE.md` apparaît modifié si vous avez fait l'étape 2 :
+  c'est normal, on le commitera dans l'exercice 01.
   Le dossier `travail/` n'est pas suivi par git : c'est voulu.
 - `uv run python outils/tester_hooks.py` affiche « Tous les cas sont conformes. »
 

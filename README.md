@@ -38,7 +38,7 @@ Au premier lancement, Claude Code demande si vous faites confiance au dossier : 
 (c'est ce qui active les réglages, les hooks, les skills et les sous-agents de `.claude/`).
 Tapez `/` pour voir les commandes disponibles, dont les skills du kit.
 
-**Dans Claude Code Desktop** (l'application de bureau Claude, partie Code) : ouvrez une nouvelle session
+**Dans Claude Desktop** (l'application de bureau Claude, onglet Code) : ouvrez une nouvelle session
 et choisissez le dossier du kit comme dossier de travail. Le même `CLAUDE.md` et le même dossier `.claude/`
 sont pris en compte. Desktop est plus confortable pour relire les modifications proposées (vue des
 différences) ; le terminal est plus direct pour enchaîner les commandes. Les exercices marchent avec les deux.

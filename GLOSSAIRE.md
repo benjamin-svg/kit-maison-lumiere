@@ -25,7 +25,8 @@ Un mot manque ? Demandez à Claude : « Explique-moi <mot> en deux phrases, avec
 | Classifieur | En mode Auto, le contrôle qui juge si une action est assez sûre pour être lancée sans vous demander | Une suppression massive est arrêtée et vous est soumise |
 | `bypassPermissions`, `dontAsk` | Des modes où Claude ne demande plus l'autorisation : à éviter sur un vrai projet | - |
 | Connecteur (serveur MCP) | Un connecteur qui donne à Claude des outils vers un service | Un serveur MCP BigQuery qui lance des requêtes |
-| Extension (plugin) | Un paquet qui regroupe skills, sous-agents, hooks et serveurs MCP, à installer d'un coup | Les outils de l'équipe partagés en un seul plugin |
+| Extensions | Ce qu'on ajoute à Claude Code quand un besoin revient : skills, sous-agents, connecteurs, hooks | Les skills et le hook du kit |
+| Plugin | Un paquet qui regroupe plusieurs extensions, à installer d'un coup | Les outils de l'équipe partagés en un seul plugin |
 | `claude -p` | Claude Code lancé sans conversation, pour une seule consigne (dans un script) | `claude -p "résume ce fichier"` |
 | `/rewind` | Revenir à un point antérieur de la conversation, et annuler les modifications de fichiers de Claude | Effacer `essai.md` créé par erreur |
 | Diff (vue des différences) | L'affichage des lignes ajoutées et retirées d'un fichier | La vue de Desktop avant d'accepter une modification |
