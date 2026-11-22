@@ -43,7 +43,7 @@ et choisissez le dossier du kit comme dossier de travail. Le même `CLAUDE.md` e
 sont pris en compte. Desktop est plus confortable pour relire les modifications proposées (vue des
 différences) ; le terminal est plus direct pour enchaîner les commandes. Les exercices marchent avec les deux.
 
-Dans les deux cas, commencez par vous présenter : « Je suis Céline » (Claude utilisera `travail/celine/`).
+Dans les deux cas, commencez par vous présenter : « Je suis <votre prénom> » (par exemple, pour Céline, Claude utilisera `travail/celine/`).
 
 ## Ce que contient le kit
 
