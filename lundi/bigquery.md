@@ -96,7 +96,7 @@ Puis vérifiez avec un `--dry_run` : il signale les erreurs de syntaxe sans rien
    (`INFORMATION_SCHEMA` : les tables où BigQuery décrit lui-même les colonnes de chaque table.)
 3. Faire ensemble un premier `--dry_run`, puis la même requête avec plafond, sur une petite question.
 4. Écrire les fiches des 3 à 5 tables les plus utiles, avec `/documenter-table` adapté à BigQuery :
-   le schéma vient de `INFORMATION_SCHEMA.COLUMNS`, le grain et les pièges viennent du métier.
+   le schéma vient de `INFORMATION_SCHEMA.COLUMNS`, la granularité et les pièges viennent du métier.
 5. Recopier les métriques validées (CA net HT, nombre de commandes) avec leur formule en SQL BigQuery,
    et les faire valider par leur propriétaire.
 6. Poser une question dont vous connaissez la réponse (un chiffre déjà publié) : si Claude ne la retrouve pas,

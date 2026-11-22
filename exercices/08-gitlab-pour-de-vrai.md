@@ -26,7 +26,7 @@ git init --bare ~/serveur-atelier.git     # le « serveur » : un dépôt sans f
 
 - Étape 1 : donnez ce chemin à la place de l'adresse GitLab. Les poussées et le garde-fou marchent pour de vrai.
 - Étape 2 : faites créer la branche, le `.gitlab-ci.yml` et le modèle de merge request, poussez, mais sans `glab`.
-  Aucun pipeline ne se lance tout seul : lancez à la main ce que ferait l'exécutant, en demandant à Claude
+  Aucun pipeline ne se lance tout seul : lancez à la main ce que ferait le runner, en demandant à Claude
   « Lis .gitlab-ci.yml et lance, dans l'ordre, les commandes du job tests, comme le ferait le runner. »
 - Étape 4 : faites-la en local ; la première barrière (le hook qui relance les tests) est bien réelle.
 - Étapes 3, 5 et 6 : lisez-les avec Claude, `REGLAGES-GITLAB.md` sous les yeux : « Explique-moi, sans rien

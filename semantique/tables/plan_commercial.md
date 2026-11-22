@@ -15,7 +15,7 @@ Origine : tableau du marketing, saisi à chaque publication du plan ; les ancien
 Pour un **bilan** d'opération (ce qui s'est vraiment passé), utiliser `calendrier_commercial`, qui donne les
 dates réalisées.
 
-## Grain
+## Granularité
 
 **Une ligne = une version d'une opération.** Une opération jamais déplacée a une ligne ; une opération
 déplacée en a deux (versions 1 et 2).

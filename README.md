@@ -57,7 +57,7 @@ Dans les deux cas, commencez par vous présenter : « Je suis Céline » (Claude
 | `outils/` | `requete.py` (SQL en lecture seule), `tester_hooks.py` (contrôle des garde-fous) |
 | `projets/portail/` | Petite application d'intranet (FastAPI), ses tests et ses tickets |
 | `exercices/` | Les consignes des exercices (pour vous : Claude n'a pas le droit de les lire) |
-| `modeles/` | Points de départ à copier hors du kit : dépôt d'atelier, software factory, BigQuery |
+| `modeles/` | Points de départ à copier hors du kit : dépôt d'atelier, usine logicielle, BigQuery |
 | `lundi/` | Refaire le travail sur les vraies données : BigQuery, GitLab, prévision et churn, questions à poser |
 | `travail/` | Un sous-dossier par participant, créé au fil des exercices (non versionné) |
 | `.claude/` | Réglages et hooks, sous-agents (`agents/`), skills (`skills/`) |
@@ -66,24 +66,27 @@ Dans les deux cas, commencez par vous présenter : « Je suis Céline » (Claude
 
 | N° | Exercice | Durée | Pour qui |
 |---|---|---|---|
-| 00 | [Prise en main](exercices/00-prise-en-main.md) | 25 min en salle (+ 20 min en autonomie) | tous |
+| 00 | [Prise en main](exercices/00-prise-en-main.md) | 30 min en salle (+ 20 min en autonomie) | tous |
 | 01 | [Git en local](exercices/01-git.md) | 15 min en salle (+ 25 min en autonomie) | tous |
-| 02 | [Du ticket à la merge request](exercices/02-software-factory.md) | 1 h 30 (démonstration de 10 min pour tous) | Maxime |
-| 03 | [Couche sémantique](exercices/03-couche-semantique.md) | 1 h 15 (30 min : étapes 1 et 2) | Céline (Olivier, Augustin) |
-| 04 | [Prévision des commandes web](exercices/04-ml-prevision.md) | 1 h 30 | Olivier |
-| 05 | [Churn](exercices/05-ml-churn.md) | 1 h 30 | Augustin |
-| 06 | [Cas d'analyse complet](exercices/06-cas-analyse.md) | 2 h | Céline |
-| 07 | [Construire sa software factory](exercices/07-construire-sa-factory.md) | 1 h 15 | Maxime |
+| 02 | [Du ticket à la merge request](exercices/02-software-factory.md) | 1 h (démonstration de 10 min pour tous) | Maxime |
+| 03 | [Couche sémantique](exercices/03-couche-semantique.md) | 1 h | Céline |
+| 04 | [Prévision des commandes web](exercices/04-ml-prevision.md) | 1 h | Olivier |
+| 05 | [Churn](exercices/05-ml-churn.md) | 1 h | Augustin |
+| 06 | [Cas d'analyse complet](exercices/06-cas-analyse.md) | 1 h 20 | Céline |
+| 07 | [Construire son usine logicielle](exercices/07-construire-sa-factory.md) | 1 h | Maxime |
 | 08 | [La chaîne sur un vrai GitLab](exercices/08-gitlab-pour-de-vrai.md) | 1 h | Maxime |
 
-Les quatre heures de parcours, après le tronc commun :
+Le tronc commun dure 2 h 45, exercices compris : Claude Code et Desktop (1 h 10, avec l'exercice 00),
+Git et GitLab (50 min, avec l'exercice 01), usine logicielle (45 min, avec la démonstration de l'exercice 02).
+
+Les 3 h 15 de parcours, après le tronc commun (les étapes « en autonomie » de chaque fiche se font après la séance) :
 
 | Qui | Déroulé |
 |---|---|
-| Maxime | 02 (1 h 30), 07 (1 h 15), 08 (1 h), bilan (15 min) |
-| Céline | Couche sémantique : théorie (45 min) et 03 (1 h 15), puis 06 (2 h) |
-| Olivier | Couche sémantique (45 min) et 03 étapes 1-2 (30 min), méthode ML (1 h), 04 (1 h 30), bilan (15 min) |
-| Augustin | Couche sémantique (45 min) et 03 étapes 1-2 (30 min), méthode ML (1 h), 05 (1 h 30), bilan (15 min) |
+| Maxime | 02 (1 h), 07 (1 h), 08 (1 h), bilan (15 min) |
+| Céline | Couche sémantique : présentation (55 min) et 03 (1 h), puis 06 (1 h 20) |
+| Olivier | Couche sémantique : présentation (55 min), méthode ML (1 h 05), 04 (1 h), bilan (15 min) |
+| Augustin | Couche sémantique : présentation (55 min), méthode ML (1 h 05), 05 (1 h), bilan (15 min) |
 
 Chaque consigne donne l'objectif, la durée, le texte exact à donner à Claude, ce qu'il faut observer,
 comment vérifier le résultat (avec les chiffres ou les ordres de grandeur attendus), et une piste pour aller

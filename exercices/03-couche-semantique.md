@@ -8,12 +8,12 @@ et s'en servir pour répondre à trois questions métier avec la skill `/analyse
 
 ## Durée
 
-- Parcours de Céline : 75 minutes (étapes 1 à 4).
-- Parcours d'Olivier et d'Augustin : 30 minutes (étapes 1 et 2 seulement).
+- Parcours de Céline : 1 heure (étapes 1 à 3, puis la première question de l'étape 4 ; les deux autres en autonomie).
+- Parcours d'Olivier et d'Augustin : en autonomie seulement (en salle, ils passent à la méthode ML).
 
 ## Rappel
 
-La **couche sémantique** dit ce que veulent dire les données : le rôle de chaque table, son grain
+La **couche sémantique** dit ce que veulent dire les données : le rôle de chaque table, sa granularité
 (ce que représente une ligne), ses jointures, ses pièges, et la définition unique de chaque indicateur.
 Ici, c'est un dossier de fichiers texte (`semantique/`), relu et versionné comme du code.
 
@@ -56,7 +56,7 @@ Validez ou corrigez la fiche proposée, puis :
 > « /documenter-table clients »
 
 **À observer** :
-- Claude teste le grain (une ligne par jour et par canal ? par client ?), mesure les valeurs vides,
+- Claude teste la granularité (une ligne par jour et par canal ? par client ?), mesure les valeurs vides,
   vérifie les jointures.
 - Pour `commandes_jour`, il compare le total de `ca_ht` à la métrique `ca_net_ht` : y a-t-il un écart ? D'où vient-il ?
   Ce que vous découvrez doit aller dans la section « Pièges connus ».
@@ -64,7 +64,7 @@ Validez ou corrigez la fiche proposée, puis :
 - Claude **demande validation** avant d'écrire la fiche. C'est vous qui validez, comme le ferait le métier.
 
 **Valider sans savoir relire le SQL.** Vous ne relisez pas chaque requête : vous vérifiez ce que le métier sait.
-- La phrase du grain (« une ligne = ... ») est-elle juste, dite avec vos mots ?
+- La phrase de granularité (« une ligne = ... ») est-elle juste, dite avec vos mots ?
 - Un chiffre que vous connaissez déjà (un total publié, un ordre de grandeur) est-il retrouvé ?
 - Chaque piège est-il expliqué en français, avec sa conséquence sur un chiffre ?
 - Ce que Claude n'a pas pu savoir est-il écrit comme une question ouverte, pas comme une certitude ?
@@ -101,7 +101,7 @@ Puis faites relire, avant de valider :
 
 Corrigez ce qu'il signale, puis passez les métriques au statut `VALIDEE`. Une définition se relit comme du code.
 
-## Étape 4 - Trois questions avec `/analyse` (20 min)
+## Étape 4 - Trois questions avec `/analyse` (5 min en salle, puis en autonomie)
 
 Posez les trois questions l'une après l'autre :
 

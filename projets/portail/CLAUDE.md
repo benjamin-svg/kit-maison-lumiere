@@ -1,6 +1,6 @@
 # Portail intranet Maison Lumière (projet d'exercice)
 
-Petite application web FastAPI qui sert de terrain pour les exercices « software factory ».
+Petite application web FastAPI qui sert de terrain pour les exercices sur l'usine logicielle.
 Les données sont fictives.
 
 ## Structure

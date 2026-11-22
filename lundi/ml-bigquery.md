@@ -85,7 +85,7 @@ sortir pour une origine antérieure au déplacement, la version 2 ensuite. La m�
 Créer un modèle écrit dans un dataset : il faut un dataset de travail où vous avez le droit d'écrire
 (le hook de coût du kit refuse `CREATE` : l'adapter pour ce seul dataset).
 
-Comparer cette méthode à la règle simple **sur le même backtest** (mêmes semaines, même horizon, même WAPE)
+Comparer cette méthode au modèle de référence **sur le même backtest** (mêmes semaines, même horizon, même WAPE)
 avant de la retenir. Sur l'historique d'apprentissage, ses scores sont trop beaux.
 
 ### Garder chaque version de la prévision
@@ -138,7 +138,7 @@ GROUP BY p.serie, p.horizon;
 Règle d'alerte simple, par série et par horizon : WAPE des 4 dernières semaines supérieure à 1,5 fois la WAPE
 du backtest sur la période de note (même série, même horizon), ou biais du même signe 4 semaines de suite.
 Attendez-vous à des alertes les semaines d'opérations (Black Friday) : regardez-les avant de changer de méthode.
-La part dans la fourchette doit rester proche de 80 % : bien en dessous, la fourchette est trop étroite. Qui reçoit l'alerte, et qui décide de revenir à la règle simple : à écrire
+La part dans la fourchette doit rester proche de 80 % : bien en dessous, la fourchette est trop étroite. Qui reçoit l'alerte, et qui décide de revenir au modèle de référence : à écrire
 dans `VALIDATION.md`.
 
 ## 2. Churn
@@ -219,7 +219,7 @@ SELECT * FROM ML.EVALUATE(MODEL `projet.churn.m_logreg`,
    WHERE date_reference = DATE '2025-06-30'));
 ```
 
-Comparer à la règle simple **à liste de même taille** : combien de vrais perdus parmi les N premiers, pour le
+Comparer au modèle de référence **à liste de même taille** : combien de vrais perdus parmi les N premiers, pour le
 modèle et pour la règle (une requête `ORDER BY ... LIMIT N` sur chacun).
 
 ### La liste du mois
@@ -252,7 +252,7 @@ Avant de construire un nouveau modèle, faites auditer l'actuel. Les questions, 
 2. **Avec quelles variables ?** `SELECT * FROM ML.FEATURE_INFO(MODEL ...)` : la liste exacte des colonnes.
    Pour chacune, d'où vient-elle et à quelle date est-elle connue ? (voir la liste de l'auditeur ci-dessous)
 3. **Quelle variable domine ?** `SELECT * FROM ML.GLOBAL_EXPLAIN(MODEL ...)` (si `enable_global_explain`).
-   Une variable qui écrase toutes les autres est suspecte : mesurez son AUC seule.
+   Une variable qui écrase toutes les autres est suspecte : mesurez combien de cas elle prédit juste à elle seule.
 4. **Que vaut-il sur une photo ultérieure ?** Reconstruisez une photo propre à une date postérieure à
    l'apprentissage, et comparez au tri par récence, à liste de même taille.
 
@@ -278,5 +278,5 @@ Le sous-agent `auditeur-fuite` du kit marche sur DuckDB. Sur BigQuery, donnez-lu
 | Modèles | Régression logistique, arbres boostés, ARIMA_PLUS | Tout scikit-learn, statsmodels... |
 | Expliquer un score | `ML.EXPLAIN_PREDICT` | à coder |
 
-Règle simple : si le modèle tient dans `LOGISTIC_REG` ou `ARIMA_PLUS(_XREG)` et que les données sont déjà dans
+En pratique : si le modèle tient dans `LOGISTIC_REG` ou `ARIMA_PLUS(_XREG)` et que les données sont déjà dans
 BigQuery, commencer par BigQuery ML.

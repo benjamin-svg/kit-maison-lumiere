@@ -19,13 +19,13 @@ de la personne, demande-le une fois au début : il sert à choisir son dossier `
 - `semantique/` : la couche sémantique (fiches des tables, définitions des métriques). À lire avant tout SQL.
 - `outils/requete.py` : exécute une requête SQL en lecture seule sur la base.
 - `outils/tester_hooks.py` : vérifie que les garde-fous fonctionnent.
-- `projets/portail/` : petite application web d'intranet (FastAPI) pour les exercices de software factory.
+- `projets/portail/` : petite application web d'intranet (FastAPI) pour les exercices sur l'usine logicielle.
 - `projets/` : les projets industrialisés (un dossier par projet, avec ses tests).
 - `exercices/` : les consignes des exercices, de `00` à `08`. **Elles sont pour le participant, pas pour toi** :
   ne les lis pas (un hook le refuse). Le participant te donne la consigne.
 - `travail/<prénom>/` : l'espace de travail de chaque participant (analyses, brouillons, modèles).
   Non versionné, sauf `travail/<prénom>/git/` (exercice 01).
-- `modeles/` : des points de départ à copier hors du kit (dépôt d'atelier, software factory, BigQuery).
+- `modeles/` : des points de départ à copier hors du kit (dépôt d'atelier, usine logicielle, BigQuery).
 - `lundi/` : les fiches pour refaire le travail sur les vraies données (BigQuery, GitLab).
 - `GLOSSAIRE.md` : les mots techniques du kit, expliqués avec un exemple.
 - `.claude/` : réglages, hooks (garde-fous), sous-agents et skills du kit.

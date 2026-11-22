@@ -3,7 +3,7 @@
 ## Objectif
 
 Construire avec Claude une prévision hebdomadaire du nombre de commandes web, à 1 semaine et à 12 semaines,
-en suivant une méthode rigoureuse : cadrage, règle simple à battre (« même semaine l'an dernier »),
+en suivant une méthode rigoureuse : cadrage, modèle de référence à battre (« même semaine l'an dernier »),
 test sur le passé (« backtest »), **choix de la méthode sur une période et note sur une autre**, validation,
 puis industrialisation : un script qui tourne chaque lundi sans Claude et garde chaque version de la prévision,
 une API (FastAPI) et une interface (Streamlit).
@@ -11,7 +11,7 @@ Refaire l'exercice sur la série des articles encombrants, plus petite et plus b
 
 ## Durée
 
-90 minutes.
+1 heure en salle : étapes 1, 2, 3 et 5. Les étapes 4 et 6 se font en autonomie (ou lundi).
 
 ## Vocabulaire
 
@@ -37,7 +37,7 @@ Passez en mode plan (Maj+Tab), puis :
 > « /modeliser Prévision hebdomadaire du nombre de commandes web non annulées, à 1 semaine et à 12 semaines, pour dimensionner la logistique. »
 
 **À observer** : Claude propose la cible exacte, la définition de la semaine (du lundi au dimanche ?),
-les fenêtres, la règle simple, la mesure d'erreur, la période de test. Discutez au moins :
+les fenêtres, le modèle de référence, la mesure d'erreur, la période de test. Discutez au moins :
 - que faire des semaines incomplètes au début et à la fin des données ?
 - quelle table utiliser (`commandes` ou `commandes_jour`) ? Que dit `semantique/` ?
 - les opérations commerciales tombent-elles à la même semaine chaque année ? Que savait-on du plan le jour
@@ -48,14 +48,14 @@ les fenêtres, la règle simple, la mesure d'erreur, la période de test. Discut
 
 Validez le plan quand il vous convient, puis sortez du mode plan.
 
-## Étape 2 - La série et la règle simple (15 min)
+## Étape 2 - La série et le modèle de référence (15 min)
 
 > « Construis la série hebdomadaire des commandes web non annulées dans travail/<prénom>/prevision/, avec les contrôles habituels, et trace-la avec matplotlib dans un fichier PNG. Puis fais un backtest de la prévision "même semaine l'an dernier", à 1 semaine et à 12 semaines, sur la période de choix seulement (les 26 premières semaines de 2025, du 30/12/2024 au 23/06/2025). Ne calcule rien encore sur la période de note (les 26 suivantes, du 30/06/2025 au 22/12/2025) : on la garde pour la fin. Donne MAE, MAPE, WAPE et biais. »
 
 **À observer** : le nombre de semaines, les semaines incomplètes écartées, le pic du Black Friday,
 le creux d'août, la tendance. Pour la naïve saisonnière, l'erreur est la même aux deux horizons : pourquoi ?
 
-## Étape 3 - Battre la règle simple, sans tricher sur le choix (20 min)
+## Étape 3 - Battre le modèle de référence, sans tricher sur le choix (20 min)
 
 > « Propose deux méthodes un peu plus élaborées (par exemple la même semaine l'an dernier corrigée de la tendance récente, et une méthode qui tient compte des opérations du plan commercial dans sa version connue le jour de la prévision). Fais exactement le même backtest sur la période de choix, et choisis la meilleure méthode pour chaque horizon. Ensuite seulement, donne le score de la règle simple et de la méthode choisie sur la période de note. Présente un tableau : période, méthode, horizon, MAE, MAPE, WAPE, biais. »
 
@@ -70,22 +70,22 @@ le creux d'août, la tendance. Pour la naïve saisonnière, l'erreur est la mêm
 - Une méthode qui fait mieux à 12 semaines qu'à 1 semaine n'a pas forcément une fuite : sur 26 semaines,
   le hasard compte. Faites vérifier par le sous-agent `auditeur-fuite` avant de conclure.
 
-## Étape 4 - La série des encombrants (10 min)
+## Étape 4 - La série des encombrants (10 min, en autonomie)
 
 > « Refais les étapes 2 et 3 sur le nombre hebdomadaire d'articles encombrants vendus sur le web (mobilier, tapis, mobilier enfant). Compare les erreurs (WAPE) avec celles de la série des commandes et explique la différence. La méthode choisie sur la période de choix est-elle encore la meilleure sur la période de note ? »
 
 **À observer** : une série de 30 à 40 articles par semaine est beaucoup plus bruitée ; l'erreur en
 pourcentage est plus forte, et la méthode gagnante change d'une période à l'autre. Conclusion possible :
-garder la règle simple pour les encombrants, ou prévoir au mois.
+garder le modèle de référence pour les encombrants, ou prévoir au mois.
 
 ## Étape 5 - Valider (10 min)
 
 > « /valider-modele travail/<prénom>/prevision »
 
-**À observer** : `VALIDATION.md` compare la méthode et la règle simple sur au moins deux périodes, pour
+**À observer** : `VALIDATION.md` compare la méthode et le modèle de référence sur au moins deux périodes, pour
 chaque série. Si la méthode ne bat pas la règle sur une série, l'avis doit le dire : c'est un résultat utile.
 
-## Étape 6 - Industrialiser (20 min)
+## Étape 6 - Industrialiser (20 min, en autonomie)
 
 > « Industrialise dans projets/prevision/ la méthode retenue pour chaque série : un module de prévision ; un script prevoir_hebdo.py --date-origine AAAA-MM-JJ qui calcule les prévisions de 1 à 12 semaines avec les seules données connues à cette date et les ajoute, datées, à projets/prevision/sorties/previsions.csv sans effacer les précédentes ; une règle d'alerte qui signale quand l'erreur moyenne des 4 dernières semaines dépasse 1,5 fois l'erreur moyenne du backtest sur la période de note, pour la même série et le même horizon ; une API FastAPI avec une route /prevision?serie=web&horizon=12 ; une interface Streamlit qui affiche la série et la prévision ; un README et des tests pytest (dont un test de l'API et un test qui vérifie qu'une deuxième exécution ajoute des lignes sans effacer les premières). Lance les tests, puis dis-moi les commandes pour lancer le script, l'API et l'interface. »
 
@@ -98,9 +98,9 @@ L'API et l'interface servent à consulter le résultat.
 
 ## Comment vérifier
 
-- Le tableau du backtest contient la règle simple et au moins deux méthodes, aux deux horizons, sur les deux périodes.
-- Règle simple, commandes web, période de choix : MAPE **13,6 %** environ (étape 2).
-- Règle simple, commandes web, période de note : MAPE **15,4 %** (à quelques dixièmes près selon la définition des semaines).
+- Le tableau du backtest contient le modèle de référence et au moins deux méthodes, aux deux horizons, sur les deux périodes.
+- Modèle de référence, commandes web, période de choix : MAPE **13,6 %** environ (étape 2).
+- Modèle de référence, commandes web, période de note : MAPE **15,4 %** (à quelques dixièmes près selon la définition des semaines).
 - `cd projets/prevision && uv run pytest -q` : tous les tests passent.
 - `projets/prevision/sorties/previsions.csv` contient deux dates d'origine différentes.
 - `VALIDATION.md` donne un avis par série, sur au moins deux périodes de test.

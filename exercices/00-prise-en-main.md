@@ -8,7 +8,7 @@ qui rendent Claude utile et sûr sur un projet : le fichier `CLAUDE.md`, le mode
 
 ## Durée
 
-- **En salle, 25 min** : étapes 1, 3, 5, 6 et 7 (ce sont les étapes 01 à 04 de la slide).
+- **En salle, 30 min** : étapes 1, 3, 5, 6 et 7 (25 min), et 5 min de questions.
 - **En autonomie, 20 min de plus** : étapes 2, 4 et 8.
 
 ## Avant de commencer
@@ -40,7 +40,9 @@ par se contredire, et l'exercice 03 ne marcherait plus. Dans le doute, refusez t
 Tapez ensuite `/memory` pour voir quels fichiers de consignes sont chargés (celui du kit, et éventuellement
 le vôtre, personnel). Puis :
 
-> « Ajoute dans CLAUDE.md, section Règles, une règle : les montants sont toujours affichés en euros avec un espace comme séparateur des milliers. Montre-moi la modification avant de l'enregistrer. Puis fais un commit de CLAUDE.md avec un message clair. »
+> « Ajoute dans CLAUDE.md, section Règles, une règle : les montants sont toujours affichés en euros avec un espace comme séparateur des milliers. Montre-moi la modification avant de l'enregistrer. »
+
+(Pas de commit ici : on le fera dans l'exercice 01, après la partie Git.)
 
 ## Étape 3 - Le mode plan (5 min, en salle)
 

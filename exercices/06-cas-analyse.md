@@ -10,7 +10,7 @@ Prérequis : l'exercice 03 (fiches `commandes_jour` et `clients`, métriques `cl
 
 ## Durée
 
-1 h 45 (parcours de Céline), puis 15 min de bilan.
+1 h 20 (parcours de Céline) : étapes 1, 2 et 4 (1 h 15), puis 5 min de bilan. Les étapes 3 et 5 se font en autonomie.
 
 ## Étape 1 - Le bilan d'une opération (25 min)
 
@@ -41,7 +41,7 @@ Le marketing demande : « Notre e-mail de la vente privée d'octobre 2025 a-t-il
   un groupe témoin tout trouvé : la comparaison « reçu contre pas reçu » mesure l'effet de l'e-mail.
 - Demandez au sous-agent `verificateur` de recalculer les taux d'achat des deux groupes.
 
-## Étape 3 - Les clients actifs touchés par nos e-mails (15 min)
+## Étape 3 - Les clients actifs touchés par nos e-mails (15 min, en autonomie)
 
 > « /analyse Parmi les clients actifs au 31 décembre 2025, selon notre définition, combien ont reçu au moins une campagne en 2025, combien en ont ouvert au moins une, et combien ont cliqué ? Donne aussi la part de ces clients parmi les actifs. »
 
@@ -58,7 +58,7 @@ Puis :
 
 > « Demande au sous-agent relecteur de relire cette note comme le ferait la responsable marketing : un chiffre est-il faux, ambigu ou sans source ? »
 
-## Étape 5 - Préparer lundi : la même requête sur BigQuery (15 min)
+## Étape 5 - Préparer lundi : la même requête sur BigQuery (15 min, en autonomie)
 
 Lisez `lundi/bigquery.md` (coût, `--dry_run`, plafond, syntaxe). Puis :
 
@@ -69,7 +69,7 @@ autrement, et l'on commence toujours par un `--dry_run`. Comparez avec `modeles/
 `modeles/bigquery/claude/skills/analyse-bigquery/SKILL.md` : ce sont les fichiers à copier dans votre dépôt lundi
 (le mode d'emploi de la copie est dans `modeles/bigquery/LISEZMOI.md`).
 
-## Bilan (15 min)
+## Bilan (5 min)
 
 Notez dans `travail/<prénom>/bilan.md` : les trois questions que vous poserez lundi sur les vraies données,
 les tables dont vous aurez besoin, et ce qu'il faut demander avant (voir `lundi/a-demander.md`).
@@ -88,5 +88,5 @@ les tables dont vous aurez besoin, et ce qu'il faut demander avant (voir `lundi/
 
 - Ajoutez à `semantique/` une fiche `emails` avec `/documenter-table emails`, dont le piège « la table ne
   contient que les inscrits ».
-- Proposez une table qui relierait chaque campagne à une opération (colonnes, grain, qui la remplit) :
+- Proposez une table qui relierait chaque campagne à une opération (colonnes, granularité, qui la remplit) :
   c'est la demande à faire à l'équipe CRM pour répondre à la question 2 sur les vraies données.

@@ -23,8 +23,8 @@ de scikit-learn.
    - données corrigées après coup : annulations et retours enregistrés après la date de référence,
      plan commercial dans sa version finale au lieu de la version connue ce jour-là.
 2. **Cible déguisée.** Une variable presque parfaitement liée à la cible : mesure, pour chaque variable,
-   l'AUC ou la corrélation avec la cible prise seule. Une AUC au-dessus de 0,95 pour une seule variable
-   est suspecte.
+   le taux de bonnes prédictions obtenu avec cette seule variable (ou sa corrélation avec la cible).
+   Une variable qui, seule, prédit juste plus de 95 % des cas est suspecte.
 3. **Découpage non temporel.** Si le modèle doit prédire l'avenir, le test doit porter sur une période
    postérieure à l'entraînement (ou sur une photo prise à une date ultérieure), et la cible de l'apprentissage
    doit être close avant la date de test. Un découpage aléatoire (`train_test_split` sans précaution) est à signaler.

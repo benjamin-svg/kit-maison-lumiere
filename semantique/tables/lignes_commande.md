@@ -16,7 +16,7 @@ commande sont ajoutés quand ils arrivent, jusqu'à plusieurs semaines après la
 ce qu'on savait à une date passée (prévision, churn), les retours récents ne sont pas encore connus.
 Aucune donnée personnelle dans cette table.
 
-## Grain
+## Granularité
 
 **Une ligne = un produit dans une commande.** Une commande de 3 produits différents a 3 lignes.
 Une ligne peut porter une quantité de 2 (deux exemplaires du même produit).
@@ -37,7 +37,7 @@ Une ligne peut porter une quantité de 2 (deux exemplaires du même produit).
 | `clients` | via `commandes` : `c.id_client = cl.id_client` | inchangé, mais `id_client` peut être vide (voir pièges) |
 | `calendrier_commercial` | `c.date_commande BETWEEN o.date_debut AND o.date_fin` | **peut dupliquer** si deux opérations se chevauchent : vérifier |
 
-Jointure interdite : `emails` directement (aucune clé commune au bon grain).
+Jointure interdite : `emails` directement (aucune clé commune à la bonne granularité).
 
 ## Colonnes utiles
 

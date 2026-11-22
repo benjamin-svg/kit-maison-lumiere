@@ -1,4 +1,4 @@
-# Exercice 07 - Construire sa software factory dans un dépôt neuf
+# Exercice 07 - Construire son usine logicielle dans un dépôt neuf
 
 ## Objectif
 
@@ -12,9 +12,9 @@ portail utilise une autre technique, la chaîne est la même : seule la commande
 
 ## Durée
 
-1 h 15 (parcours de Maxime).
+1 heure (parcours de Maxime) : étapes 0 à 5. L'étape 6 se fait en autonomie.
 
-## Étape 0 - Partir d'un dépôt neuf, hors du kit (10 min)
+## Étape 0 - Partir d'un dépôt neuf, hors du kit (5 min)
 
 Dans un terminal (pas dans Claude) :
 
@@ -34,7 +34,7 @@ Sous Windows, remplacez `~/atelier-factory` par un dossier de votre choix, par e
 hooks, sous-agents, skills), même en mode « Accepter les modifications ». C'est une protection voulue : ces
 fichiers changent ce que Claude a le droit de faire. Relisez le fichier proposé, puis acceptez.
 
-## Étape 1 - Le `CLAUDE.md` du projet (10 min)
+## Étape 1 - Le `CLAUDE.md` du projet (5 min)
 
 > « Lis ce dépôt, puis interroge-moi, une question à la fois, pour écrire le CLAUDE.md du projet : ce que fait l'application, sa structure, les commandes, et les règles de travail. Les règles que je veux : une demande = un ticket = une branche ticket/<identifiant>-<mot-cle> ; avant de corriger une anomalie, un test qui la reproduit ; ne jamais modifier un test existant pour le faire passer ; pas de nouvelle dépendance sans demander ; commits en français avec l'identifiant du ticket ; Claude ne fusionne jamais. Montre-moi le fichier avant de l'écrire. »
 
@@ -76,7 +76,7 @@ de merge request. Si une brique manque ou se comporte mal, corrigez-la : c'est l
 
 Si vous avez le temps : traitez aussi le retour de recette `tickets/A-202-recette-seuil.md` (test qui échoue d'abord).
 
-## Étape 6 - Comparer au modèle et préparer lundi (5 min)
+## Étape 6 - Comparer au modèle et préparer lundi (5 min, en autonomie)
 
 Ouvrez `modeles/factory/` dans le kit (`LISEZMOI.md` d'abord). C'est la version générique de la même chaîne.
 Ce dossier est hors du dépôt d'atelier : donnez-y d'abord accès à Claude en tapant

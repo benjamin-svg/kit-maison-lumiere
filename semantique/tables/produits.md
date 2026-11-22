@@ -6,7 +6,7 @@ Statut : **A_COMPLETER**
 
 À compléter.
 
-## Grain
+## Granularité
 
 Une ligne = à compléter.
 

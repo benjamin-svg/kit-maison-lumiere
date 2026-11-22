@@ -24,7 +24,7 @@ Chaque fiche suit le même plan, dans cet ordre :
 1. **Rôle et origine** : à quoi sert la table, en une ou deux phrases, et pour quelles questions l'utiliser (ou non).
    D'où elle vient (logiciel source), à quelle fréquence elle est mise à jour, et si elle garde l'historique
    ou seulement l'état du jour (une table « état du jour » ne dit pas ce qu'on savait à une date passée).
-2. **Grain** : ce que représente une ligne (« une ligne = une ligne de commande »). C'est la notion la plus
+2. **Granularité** : ce que représente une ligne (« une ligne = une ligne de commande »). C'est la notion la plus
    importante : elle dit ce qu'on peut additionner sans doublon.
 3. **Clés** : la clé primaire (unique par ligne) et les clés étrangères.
 4. **Jointures autorisées** : avec quelles tables, sur quelles colonnes, et ce que la jointure fait au nombre de lignes.

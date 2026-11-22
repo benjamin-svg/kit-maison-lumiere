@@ -1,6 +1,6 @@
 ---
 name: modeliser
-description: Conduit un projet de modélisation (prévision ou classification, par exemple churn) de bout en bout selon les pratiques du métier - partir de la décision et du coût des erreurs, définir la cible en dates, battre une règle simple, valider sur le futur, mesurer l'incertitude, industrialiser et surveiller. À utiliser quand on démarre un modèle de machine learning sur les données de formation.
+description: Conduit un projet de modélisation (prévision ou classification, par exemple churn) de bout en bout selon les pratiques du métier - partir de la décision et du coût des erreurs, définir la cible en dates, battre un modèle de référence, valider sur le futur, mesurer l'incertitude, industrialiser et surveiller. À utiliser quand on démarre un modèle de machine learning sur les données de formation.
 argument-hint: "[objectif du modèle]"
 ---
 
@@ -12,7 +12,7 @@ Travailler dans `travail/<prénom>/` pour l'exploration, puis dans `projets/<nom
 industrialisée (tests compris). Demander le prénom s'il n'est pas connu.
 
 Cette skill suit les pratiques reconnues du métier : partir de la décision (démarche CRISP-DM), commencer
-par une règle simple et un modèle simple (« Rules of Machine Learning » de Google), valider sur des données
+par un modèle de référence (une règle simple) et un modèle simple (« Rules of Machine Learning » de Google), valider sur des données
 postérieures et par backtest (Hyndman et Athanasopoulos, « Forecasting: Principles and Practice »),
 traquer les fuites (Kapoor et Narayanan), documenter avant la mise en service (« Model Cards »).
 
@@ -45,7 +45,7 @@ Courbe de la série ou répartition de la cible ; volumes par période ; valeurs
 canal, changement de définition) ; événements exceptionnels. Écrire ce qu'on en retient avant de choisir
 une méthode.
 
-## 3. Poser la règle simple à battre
+## 3. Poser le modèle de référence à battre
 
 Avant tout modèle, calculer une référence simple et compréhensible :
 - prévision : « même semaine l'an dernier », ou « moyenne des 4 dernières semaines » ;
@@ -86,7 +86,7 @@ Si le modèle ne bat pas nettement la règle, garder la règle : elle est plus s
   avec la version du code et du modèle.
 - Une **surveillance** : comparer chaque semaine (ou chaque mois) la prévision au réel ; une règle d'alerte
   écrite (par exemple erreur des 4 dernières semaines supérieure à 1,5 fois celle du backtest) ; qui reçoit
-  l'alerte, et le retour à la règle simple si le modèle se dégrade.
+  l'alerte, et le retour au modèle de référence si le modèle se dégrade.
 - Pour une campagne (churn) : un **groupe témoin** tiré au hasard dans la liste, qui ne reçoit pas l'offre,
   pour mesurer ce que la campagne rapporte. Un bon score de départ ne prouve pas que la relance fait revenir.
 - Si demandé : une petite API FastAPI et une interface Streamlit qui lisent le modèle enregistré.

@@ -8,8 +8,8 @@ commit, branche, conflit et résolution, historique. Puis relier ces gestes à c
 
 ## Durée
 
-- **En salle, 15 min** : étapes 1 à 3 (ce sont les étapes 01 à 03 de la slide), puis l'étape 5 racontée par Claude.
-- **En autonomie, 25 min de plus** : étapes 4 et 5 en entier, et « Pour aller plus loin ».
+- **En salle, 15 min** : étapes 1 à 3 (ce sont les étapes 01 à 03 de la slide).
+- **En autonomie, 25 min de plus** : étapes 4 et 5, et « Pour aller plus loin ».
 
 ## Vocabulaire
 
@@ -21,7 +21,7 @@ commit, branche, conflit et résolution, historique. Puis relier ces gestes à c
 - **Merge request** (GitLab) : la demande, sur le serveur, de fusionner une branche dans `main`, avec relecture
   et tests automatiques.
 
-## Étape 1 - L'état du dépôt (5 min)
+## Étape 1 - L'état du dépôt (3 min)
 
 > « Explique-moi l'état de ce dépôt git : sur quelle branche je suis, les derniers commits, les fichiers modifiés et ceux que git ignore. Pourquoi la base DuckDB et les CSV ne sont-ils pas suivis ? »
 
@@ -33,13 +33,13 @@ Si git ne connaît pas encore votre nom :
 
 > « Configure git pour ce dépôt seulement avec mon prénom et l'adresse prenom@exemple.fr. »
 
-## Étape 2 - Un premier commit (5 min)
+## Étape 2 - Un premier commit (4 min)
 
 > « Crée le fichier travail/<prénom>/git/ordre-du-jour.md avec un titre et cinq points numérotés pour une réunion d'équipe sur les soldes d'été. Puis fais un commit avec un message clair en français. Montre-moi la commande utilisée. »
 
 **À observer** : `git add` (choisir ce qui entre dans le commit) puis `git commit -m "..."`.
 
-## Étape 3 - Une branche et un conflit volontaire (15 min)
+## Étape 3 - Une branche et un conflit volontaire (8 min)
 
 > « Je veux voir un conflit git. Crée une branche essai/ordre-du-jour, et sur cette branche remplace le point 3 de travail/<prénom>/git/ordre-du-jour.md par "3. Bilan du Black Friday", puis commite. Reviens ensuite sur main, remplace le même point 3 par "3. Préparation des soldes d'hiver", et commite. Enfin, fusionne essai/ordre-du-jour dans main. Arrête-toi au conflit et explique-le-moi sans le résoudre. »
 
@@ -54,13 +54,13 @@ Puis décidez vous-même :
 
 **À observer** : la résolution est un choix humain ; Claude l'exécute (`git add` puis `git commit`).
 
-## Étape 4 - L'historique (5 min)
+## Étape 4 - L'historique (5 min, en autonomie)
 
 > « Montre-moi l'historique sous forme de graphe, avec toutes les branches, et explique chaque ligne. »
 
 **À observer** : `git log --oneline --graph --all` ; le commit de fusion a deux parents.
 
-## Étape 5 - Et sur GitLab ? (10 min)
+## Étape 5 - Et sur GitLab ? (10 min, en autonomie)
 
 > « Si ce dépôt était hébergé sur le GitLab de l'entreprise, explique-moi, étape par étape et sans rien exécuter, ce qui se passerait entre la création de ma branche et la fusion dans main : git push, merge request, pipeline de tests, relecture, fusion. Qu'est-ce qui change par rapport à ce que nous venons de faire en local ? »
 

@@ -1,6 +1,6 @@
 ---
 name: ticket-vers-merge-request
-description: Mini software factory locale - lit un ticket, vérifie que ses critères sont testables, crée une branche, planifie, code test d'abord par petites étapes, relit son propre diff, fait relire par le sous-agent relecteur, puis prépare la merge request. Suit les pratiques courantes du développement (critères vérifiables, test d'abord, petits changements, relecture). À utiliser pour traiter un ticket d'évolution du portail.
+description: Mini usine logicielle locale - lit un ticket, vérifie que ses critères sont testables, crée une branche, planifie, code test d'abord par petites étapes, relit son propre diff, fait relire par le sous-agent relecteur, puis prépare la merge request. Suit les pratiques courantes du développement (critères vérifiables, test d'abord, petits changements, relecture). À utiliser pour traiter un ticket d'évolution du portail.
 argument-hint: "[fichier du ticket]"
 disable-model-invocation: true
 ---
@@ -10,7 +10,7 @@ disable-model-invocation: true
 Ticket : $ARGUMENTS (par exemple `projets/portail/tickets/T-101-filtre-famille-delais.md`).
 Si le prénom de la personne n'est pas connu, le demander.
 
-Rappel : sur GitLab, une **merge request** (demande de fusion) propose de fusionner une branche dans `main` ;
+Rappel : sur GitLab, une **merge request** (MR, « requête de fusion » dans GitLab en français) propose de fusionner une branche dans `main` ;
 elle porte une description, la liste des commits, le résultat des tests automatiques et la relecture.
 Ici on prépare tout cela en local : seule la création sur le serveur manque.
 

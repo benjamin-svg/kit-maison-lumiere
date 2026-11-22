@@ -14,9 +14,9 @@ Un mot manque ? Demandez à Claude : « Explique-moi <mot> en deux phrases, avec
 | Compacter | Résumer automatiquement une longue conversation pour libérer de la place dans le contexte | Après une heure de travail, Claude garde un résumé au lieu de tout l'historique |
 | `CLAUDE.md` | Le fichier de consignes lu à chaque session | La règle « ne jamais modifier `donnees/brutes/` » |
 | Mode plan | Mode où Claude lit et propose un plan sans rien modifier (Maj+Tab) | Le plan de la page « 10 produits les plus vendus » |
-| Procédure (skill) | Un fichier de consignes pour une tâche, appelé par `/nom` | `/analyse`, `.claude/skills/analyse/SKILL.md` |
+| Skill | Un fichier de consignes pour une tâche, appelé par `/nom` | `/analyse`, `.claude/skills/analyse/SKILL.md` |
 | Sous-agent | Un Claude séparé, avec son propre contexte, pour une tâche précise | Le `verificateur` recalcule un chiffre sans voir la première requête |
-| Déclencheur (hook) | Un programme lancé par Claude Code avant ou après une action, qui peut la refuser | `garde_fou.py` refuse `rm -rf` |
+| Hook | Un programme lancé par Claude Code avant ou après une action, qui peut la refuser | `garde_fou.py` refuse `rm -rf` |
 | PreToolUse, PostToolUse | Les moments où un hook est lancé : avant une action (pour refuser), après (pour réagir) | Avant : garde-fou. Après : relancer les tests |
 | Code 2 | Le code de sortie par lequel un hook signale un problème à Claude | Le hook de tests renvoie 2 quand un test échoue |
 | Matcher | La liste des outils qui déclenchent un hook | `"Bash\|Write\|Edit"` |
@@ -36,18 +36,20 @@ Un mot manque ? Demandez à Claude : « Explique-moi <mot> en deux phrases, avec
 | Mot | Ce que c'est | Exemple |
 |---|---|---|
 | Dépôt | Le dossier suivi par git, avec tout son historique | Le kit |
-| Version (commit) | Une photo enregistrée des fichiers, avec un message qui dit pourquoi | « Ajoute le filtre famille (T-101) » |
+| Commit | Une photo enregistrée des fichiers, avec un message qui dit pourquoi (« validation » dans GitLab en français) | « Ajoute le filtre famille (T-101) » |
+| Index (zone de préparation) | Les modifications choisies avec `git add`, qui entreront dans le prochain commit | `git add app/delais.py` puis `git commit` |
+| `.gitignore` | La liste des fichiers que git ne suit pas | `.venv/`, `travail/`, la base DuckDB |
 | Branche | Une ligne de travail parallèle | `ticket/T-101-filtre-famille` |
 | HEAD | Le commit sur lequel on se trouve | Après `git switch main`, HEAD est le dernier commit de `main` |
 | Fusion (merge) | Ramener le travail d'une branche dans une autre | T-103 fusionnée dans `main` |
 | Conflit | Deux branches ont modifié la même ligne ; un humain choisit | Le point 3 de l'ordre du jour |
-| Envoyer, récupérer (push, pull) | Envoyer ses commits au serveur, récupérer ceux des autres | `git push -u origin ticket/A-201` |
-| Demande de fusion (merge request, MR) | Sur GitLab, la demande de fusionner une branche, avec diff, tests et relecture | `glab mr create` |
-| Chaîne de contrôles (pipeline, CI) | Les vérifications lancées automatiquement à chaque modification, décrites dans `.gitlab-ci.yml` | Les tests du portail à chaque merge request |
-| Tâche (job) | Une tâche d'un pipeline | Le job `tests` |
-| Exécutant (runner) | La machine qui exécute les jobs | Un runner partagé de l'entreprise |
-| Dépôt distant (remote, origin) | La copie du dépôt sur le serveur, vers laquelle on envoie ses versions | `origin`, le dépôt sur GitLab |
-| Pull request (PR) | Le nom de la demande de fusion sur GitHub | Les articles sur Stripe ou Spotify parlent de PR |
+| Pousser, récupérer (push, pull) | Pousser ses commits : les envoyer au serveur ;, récupérer ceux des autres | `git push -u origin ticket/A-201` |
+| Merge request (MR) | Sur GitLab, la demande de fusionner une branche, avec diff, tests et relecture (« requête de fusion » dans l'interface en français) | `glab mr create` |
+| Pipeline (CI) | Les vérifications lancées automatiquement à chaque modification, décrites dans `.gitlab-ci.yml` | Les tests du portail à chaque merge request |
+| Job | Une étape d'un pipeline, par exemple « lancer les tests » | Le job `tests` |
+| Runner | La machine qui exécute les jobs | Un runner partagé de l'entreprise |
+| Dépôt distant (remote, origin) | La copie du dépôt sur le serveur, vers laquelle on pousse ses commits | `origin`, le dépôt sur GitLab |
+| Pull request (PR) | Le nom de la merge request sur GitHub | Les articles sur Stripe ou Spotify parlent de PR |
 | Branche protégée | Une branche où personne ne pousse directement | `main` |
 | `glab` | L'outil de GitLab en ligne de commande | `glab mr view 3 --comments` |
 | `Closes #4` | Écrit dans une merge request, ferme le ticket 4 à la fusion | - |
@@ -74,8 +76,8 @@ Un mot manque ? Demandez à Claude : « Explique-moi <mot> en deux phrases, avec
 
 | Mot | Ce que c'est | Exemple |
 |---|---|---|
-| Couche sémantique | Ce qui dit ce que veulent dire les données : rôle des tables, grain, jointures, définitions des indicateurs | `semantique/` |
-| Grain | Ce que représente une ligne d'une table | `lignes_commande` : un produit dans une commande |
+| Couche sémantique | Ce qui dit ce que veulent dire les données : rôle des tables, granularité, jointures, définitions des indicateurs | `semantique/` |
+| Granularité | Ce que représente une ligne d'une table (on dit aussi « niveau de détail ») | `lignes_commande` : un produit dans une commande |
 | Agrégat | Une table de totaux précalculés | `commandes_jour` |
 | Jointure | Relier deux tables par une colonne commune | `commandes` et `lignes_commande` sur `id_commande` |
 | Doublon après jointure | Une valeur répétée sur plusieurs lignes après une jointure, puis additionnée à tort | `montant_ttc` répété sur chaque ligne de commande |
@@ -109,19 +111,26 @@ Un mot manque ? Demandez à Claude : « Explique-moi <mot> en deux phrases, avec
 | Mot | Ce que c'est | Exemple |
 |---|---|---|
 | Départs de clients (churn) | Les clients qui cessent d'acheter | Un client sans commande dans les 6 mois après la photo |
-| Cible | Ce que le modèle prédit | `perdu_6m` |
-| Règle simple | La méthode évidente que le modèle doit battre | « Pas d'achat depuis 270 jours » |
+| Jeu de données | Le tableau sur lequel le modèle apprend : une ligne par exemple (un client, une semaine), une colonne par information | `clients_churn_snapshot` : une ligne par client |
+| Variable cible (target) | La colonne que le modèle doit prédire | `perdu_6m` |
+| Variables explicatives (features) | Les colonnes dont le modèle se sert pour prédire la cible | Récence, commandes sur 12 mois, ouvertures d'e-mails |
+| Entraînement | L'étape où le modèle cherche, sur des exemples dont on connaît la réponse, comment passer des variables explicatives à la cible | La régression logistique entraînée sur la photo du 31/12/2024 |
+| Jeu d'entraînement, jeu de test | Les exemples qui servent à apprendre ; ceux, mis de côté, qui servent à mesurer l'erreur sur des cas jamais vus | Entraîner sur la photo de 2024, tester sur celle de juin 2025 |
+| Apprentissage supervisé, non supervisé | Avec une cible connue dans les exemples (prédire) ; sans cible (regrouper des clients qui se ressemblent) | Le churn est supervisé ; une segmentation de clients est non supervisée |
+| Série temporelle | Une mesure suivie dans le temps à pas régulier, qu'on prévoit à partir de son passé | Les commandes web par semaine |
+| Modèle de référence (baseline) | La méthode évidente, souvent une règle simple, que le modèle doit battre : sans elle, on ne sait pas si le modèle apporte quelque chose | « Pas d'achat depuis 270 jours » |
 | Photo (à une date) | Les clients tels qu'ils étaient à une date, avec la cible observée après | `clients_churn_snapshot` au 30/06/2025 |
 | Fuite de données | Une information inconnue le jour de la prédiction, utilisée par le modèle | Prévoir les ventes d'une opération avec le plan commercial dans sa version finale, publiée après coup |
 | Test sur le passé (backtest) | Se replacer dans le passé, prévoir, comparer au réel, et recommencer | 26 semaines de 2025 |
 | Origine | La date où l'on fait la prévision ; on n'utilise que ce qu'on savait ce jour-là | Le lundi 30/06/2025, avec les commandes jusqu'au dimanche 29/06 |
 | Fourchette (intervalle de prévision) | Les bornes entre lesquelles le réel devrait tomber, par exemple 8 fois sur 10 | « 400 commandes, entre 340 et 470 » |
 | Horizon | Combien de temps à l'avance on prévoit | 1 semaine, 12 semaines |
-| MAE, MAPE, WAPE | Erreur moyenne ; erreur moyenne en % ; erreur totale divisée par le réel total | MAPE de 15,4 % pour la règle simple |
+| MAE, MAPE, WAPE | Erreur moyenne ; erreur moyenne en % ; erreur totale divisée par le réel total | MAPE de 15,4 % pour le modèle de référence |
 | Biais | Le modèle prévoit-il en moyenne trop, ou pas assez ? | -49,9 commandes par semaine |
-| Précision, rappel | Parmi les ciblés, combien partent ; parmi les partants, combien sont ciblés | 91,9 % et 50,3 % pour la règle |
-| AUC | La probabilité qu'un partant soit classé au-dessus d'un fidèle (0,5 = hasard, 1 = parfait) | 0,853 |
+| Taux de bonnes prédictions (accuracy) | La part des clients pour lesquels le modèle a raison, partants et fidèles confondus | Trompeur quand une des deux classes est rare |
+| Matrice de confusion | Le tableau à quatre cases qui croise ce que le modèle prédit et ce qui s'est passé : bons ciblages, fausses alertes, partants manqués, fidèles bien laissés | La base de la précision et du rappel |
+| Précision, rappel | Parmi les ciblés, combien partent vraiment ; parmi les partants, combien sont ciblés | 91,9 % et 50,3 % pour le modèle de référence |
 | Régression logistique | Un modèle simple qui pondère les variables pour donner une probabilité | Le modèle churn du kit |
-| Sur-apprentissage | Un modèle qui colle au passé et se trompe sur des données nouvelles | Les annales apprises par cœur |
+| Surapprentissage | Un modèle qui colle au passé et se trompe sur des données nouvelles | Les annales apprises par cœur |
 | Groupe témoin | Des clients tirés au hasard qui ne reçoivent pas l'offre, pour mesurer son effet | 10 % de la liste de relance |
 | Semaine ISO, semaine 53 | Semaines du lundi au dimanche, numérotées ; certaines années en ont 53 | 2026 |

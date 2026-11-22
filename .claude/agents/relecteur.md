@@ -46,7 +46,7 @@ Le nom d'une branche git (ou un ticket de `projets/portail/tickets/`). Tu regard
 - Recalcule chaque chiffre cité dans les pièges et les exemples, et signale tout écart.
 - Vérifie la cohérence entre métriques (mêmes filtres que `ca_net_ht` et `nb_commandes`) et avec
   les colonnes existantes (par exemple `perdu_6m`) ; vérifie que le champ `additivite` est juste.
-- Pour une fiche de table : le grain est-il prouvé par une requête ? l'origine, l'historique (ou l'état du
+- Pour une fiche de table : la granularité est-elle prouvée par une requête ? l'origine, l'historique (ou l'état du
   jour) et les données personnelles sont-ils dits ? les contrôles à relancer tournent-ils ?
 
 Tu ne modifies aucun fichier. Tu ne fusionnes rien.

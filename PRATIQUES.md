@@ -22,7 +22,7 @@ Lundi, si vous adaptez un outil, gardez ces pratiques : ce sont elles qui renden
 | Pratique | Où dans le kit |
 |---|---|
 | Une seule définition par indicateur, avec un propriétaire | `metriques.yml`, champs `definition`, `proprietaire` |
-| Le grain d'une table, prouvé par une requête | fiche de table, section 2 |
+| La granularité d'une table, prouvée par une requête | fiche de table, section 2 |
 | Origine, fréquence de mise à jour, historique ou état du jour | fiche de table, section 1 |
 | Données personnelles signalées | fiche de table, section 5 |
 | Des contrôles qu'on relance à chaque mise à jour (clé unique, jamais vide, jointures complètes) | fiche de table, section 8 |
@@ -35,13 +35,13 @@ Lundi, si vous adaptez un outil, gardez ces pratiques : ce sont elles qui renden
 | Pratique | Source | Où dans le kit |
 |---|---|---|
 | Partir de la décision et du coût des erreurs | démarche CRISP-DM | `/modeliser`, étape 1 |
-| Une règle simple d'abord, un modèle simple ensuite | Google, « Rules of Machine Learning » | `/modeliser`, étapes 3 et 4 |
+| Un modèle de référence (une règle simple) d'abord, un modèle simple ensuite | Google, « Rules of Machine Learning » | `/modeliser`, étapes 3 et 4 |
 | Valider sur le futur, par backtest à origine glissante | Hyndman et Athanasopoulos, « Forecasting: Principles and Practice » | `/modeliser`, étape 4 |
 | Choisir la méthode sur une période, la noter sur une autre | même source | `/modeliser`, `/valider-modele` |
 | Donner une fourchette de prévision ; vérifier qu'un score est calibré | même source ; scikit-learn | `/modeliser`, étape 4 |
 | Traquer les fuites (variables connues après coup, préparation apprise sur le test...) | Kapoor et Narayanan, 2023 ; scikit-learn, « Common pitfalls » | sous-agent `auditeur-fuite` |
 | Une fiche de validation avant la mise en service, relue par une autre personne | Mitchell et al., « Model Cards », 2019 | `/valider-modele` |
-| Surveiller, et revenir à la règle simple si le modèle se dégrade | Google, « Rules of Machine Learning » | `/modeliser`, étape 6 |
+| Surveiller, et revenir au modèle de référence si le modèle se dégrade | Google, « Rules of Machine Learning » | `/modeliser`, étape 6 |
 | Mesurer l'effet d'une campagne avec un groupe témoin | pratique du test contrôlé | `/modeliser`, étape 6 |
 
 ## Développement (`/ticket-vers-merge-request`, `/recette`, `relecteur`, hooks)

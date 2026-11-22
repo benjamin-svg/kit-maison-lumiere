@@ -1,9 +1,9 @@
-# Exercice 02 - Du ticket à la merge request : une software factory en local
+# Exercice 02 - Du ticket à la merge request : une usine logicielle en local
 
 ## Objectif
 
 Faire traiter un ticket de bout en bout par Claude, comme dans une chaîne de production logicielle
-(« software factory ») : ticket, branche, plan, code, tests automatiques, relecture, message de merge request.
+(« usine logicielle », en anglais *software factory*) : ticket, branche, plan, code, tests automatiques, relecture, message de merge request.
 Puis traiter un retour de recette : transformer une anomalie signalée en test qui échoue, corriger, prouver.
 
 Terrain de jeu : `projets/portail/`, une petite application d'intranet (FastAPI).
@@ -14,7 +14,8 @@ GitLab (gitlab.com).
 
 ## Durée
 
-90 minutes (parcours de Maxime). En démonstration pendant le tronc commun : étapes 2 et 3, 10 minutes.
+1 heure (parcours de Maxime) : étapes 1, 2, 3 et 5. L'étape 4 se fait en autonomie.
+En démonstration pendant le tronc commun : étapes 2 et 3, 10 minutes.
 
 ## La chaîne, et ce qui la remplace ici
 
@@ -27,7 +28,7 @@ GitLab (gitlab.com).
 | Merge request | fichier `travail/<prénom>/merge-requests/T-xxx.md` |
 | Recette par le métier | ticket de recette T-103, skill `/recette` |
 
-## Étape 1 - Découvrir le portail (10 min)
+## Étape 1 - Découvrir le portail (5 min)
 
 > « Explique-moi le projet projets/portail : ce qu'il fait, comment il est organisé, comment le lancer et le tester. Lance les tests, puis démarre le portail et dis-moi quelle adresse ouvrir. »
 
@@ -36,7 +37,7 @@ Ouvrez http://127.0.0.1:8000 dans votre navigateur, parcourez les deux pages. Ar
 
 **À observer** : Claude lit `projets/portail/CLAUDE.md` (les règles propres au projet) en plus de celui de la racine.
 
-## Étape 2 - Du ticket à la merge request (25 min)
+## Étape 2 - Du ticket à la merge request (20 min)
 
 Vérifiez que `git status` est propre (le dossier `travail/` n'est pas suivi : il ne compte pas). Puis :
 
@@ -76,7 +77,7 @@ git restore --source=main, lance les tests, puis reviens à ta version et relanc
 Claude a peut-être déjà repéré ce bug à l'étape 1 ou pendant T-101 (le relecteur aussi) : c'est bon signe,
 une relecture sert à cela. L'intérêt de l'étape est la méthode : test qui échoue, correction, preuve.
 
-## Étape 4 - Un deuxième ticket, puis la fusion avec conflit (20 min)
+## Étape 4 - Un deuxième ticket, puis la fusion avec conflit (20 min, en autonomie)
 
 > « Reviens sur main. /ticket-vers-merge-request projets/portail/tickets/T-102-panier-moyen-commandes-du-jour.md »
 
@@ -108,7 +109,7 @@ si un test existant semble faux, le signaler. Que fait Claude ?
 - Mauvais comportement : il modifie le test sans le dire. Dans ce cas, demandez au sous-agent `relecteur`
   de relire la branche : il doit le signaler (« un test existant a été modifié »).
 
-C'est le risque principal d'une software factory : un agent qui affaiblit les tests pour obtenir du vert.
+C'est le risque principal d'une usine logicielle : un agent qui affaiblit les tests pour obtenir du vert.
 
 ## Comment vérifier
 

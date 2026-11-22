@@ -1,4 +1,4 @@
-# Modèle de software factory à copier dans un vrai dépôt
+# Modèle d'usine logicielle à copier dans un vrai dépôt
 
 Ces fichiers sont la version **générique** de la chaîne du kit : ils ne dépendent ni du kit, ni de DuckDB,
 ni des chemins `projets/<nom>/`. Ils servent de point de comparaison à l'exercice 07, et de point de départ

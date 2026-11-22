@@ -1,6 +1,6 @@
 ---
 name: documenter-table
-description: Rédige ou complète la fiche d'une table dans semantique/tables/ selon les pratiques d'un catalogue de données - grain prouvé, jointures mesurées, historique ou état du jour, données personnelles, contrôles à relancer - au format de semantique/README.md, puis demande validation avant d'écrire. À utiliser quand on veut documenter une table de la base de formation.
+description: Rédige ou complète la fiche d'une table dans semantique/tables/ selon les pratiques d'un catalogue de données - granularité prouvée, jointures mesurées, historique ou état du jour, données personnelles, contrôles à relancer - au format de semantique/README.md, puis demande validation avant d'écrire. À utiliser quand on veut documenter une table de la base de formation.
 argument-hint: "[nom_de_table]"
 ---
 
@@ -21,7 +21,7 @@ des contrôles qu'on pourra relancer à chaque mise à jour.
    - nombre de lignes ; un échantillon de 10 lignes ;
    - pour chaque colonne : part de valeurs vides, nombre de valeurs distinctes, minimum et maximum
      (dates, montants), valeurs possibles quand il y en a peu ;
-   - **le grain** : tester la clé supposée (`COUNT(*)` contre `COUNT(DISTINCT ...)`) ;
+   - **la granularité** : tester la clé supposée (`COUNT(*)` contre `COUNT(DISTINCT ...)`) ;
    - **les jointures** : pour chaque clé étrangère supposée, combien de lignes trouvent leur correspondance ?
    - **le temps** : période couverte, dernière date présente, fuseau horaire des dates ; la table garde-t-elle
      l'historique, ou seulement l'état du jour ? (une colonne « statut » ou « dernière date » est une valeur
@@ -46,4 +46,4 @@ des contrôles qu'on pourra relancer à chaque mise à jour.
   résultat a été affiché. Pas de chiffre estimé de tête : s'il manque, lancer la requête ou écrire « à mesurer ».
 - Une fiche courte : moins de 120 lignes. Le détail des contrôles va dans la section « Suivi », sous forme de requêtes.
 - Ne pas lire `exercices/` ni `donnees/generer_donnees.py` : documenter et calculer à partir des données.
-- Français simple, phrases courtes ; expliquer les termes techniques (grain, clé, jointure) la première fois.
+- Français simple, phrases courtes ; expliquer les termes techniques (granularité, clé, jointure) la première fois.
