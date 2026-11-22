@@ -1,0 +1,107 @@
+# Définitions des indicateurs de Maison Lumière.
+# Règle : un chiffre diffusé s'appuie sur une métrique au statut VALIDEE.
+# Le format est décrit dans semantique/README.md.
+
+version: 1
+
+metriques:
+
+  ca_net_ht:
+    statut: VALIDEE
+    libelle: Chiffre d'affaires net HT
+    definition: >
+      Montant hors taxes payé par les clients, remises déduites, retours déduits,
+      sur les commandes non annulées. Hors frais de port.
+    formule_sql: >
+      SELECT SUM(l.montant_ht - l.montant_retourne_ht) AS ca_net_ht
+      FROM lignes_commande l
+      JOIN commandes c ON c.id_commande = l.id_commande
+      WHERE c.statut <> 'ANNULEE'
+        AND c.date_commande BETWEEN :date_debut AND :date_fin
+    exemple: 533 787,62 € HT du 01/12/2024 au 31/12/2024, tous canaux
+    additivite: additive (on peut sommer les jours, les canaux, les familles)
+    tables: [lignes_commande, commandes]
+    jointure: lignes_commande l JOIN commandes c ON c.id_commande = l.id_commande
+    filtres:
+      - c.statut <> 'ANNULEE'
+    date_de_rattachement: commandes.date_commande
+    unite: euros HT
+    pieges:
+      - Ne pas utiliser commandes.montant_ttc (TTC, frais de port inclus).
+      - Ne pas utiliser une table agrégée non documentée sans avoir comparé son total à cette définition.
+      - Les retours sont rattachés à la date de commande, pas à la date de retour.
+    proprietaire: Contrôle de gestion e-commerce
+    valide_le: 2025-12-15
+
+  nb_commandes:
+    statut: VALIDEE
+    libelle: Nombre de commandes
+    definition: Nombre de commandes distinctes non annulées.
+    formule_sql: >
+      SELECT COUNT(DISTINCT c.id_commande) AS nb_commandes
+      FROM commandes c
+      WHERE c.statut <> 'ANNULEE'
+        AND c.date_commande BETWEEN :date_debut AND :date_fin
+    exemple: 3 404 commandes du 01/12/2024 au 31/12/2024, tous canaux
+    additivite: additive (une commande a une seule date et un seul canal)
+    tables: [commandes]
+    filtres:
+      - c.statut <> 'ANNULEE'
+    date_de_rattachement: commandes.date_commande
+    unite: commandes
+    pieges:
+      - Après une jointure avec lignes_commande, utiliser COUNT(DISTINCT ...) et non COUNT(*).
+      - Les commandes EN_COURS sont comptées.
+    proprietaire: Contrôle de gestion e-commerce
+    valide_le: 2025-12-15
+
+  client_actif:
+    statut: A_COMPLETER
+    libelle: Client actif
+    definition: >
+      A COMPLETER. Questions à trancher : sur quelle période (année civile, 12 mois glissants) ?
+      Quelles commandes comptent (annulées ?) ? Quels clients exclure (identifiant vide, anonymisés) ?
+      À quelle date d'observation ?
+    formule_sql: A COMPLETER
+    additivite: A COMPLETER
+    tables: []
+    filtres: []
+    date_de_rattachement: A COMPLETER
+    unite: clients
+    pieges: []
+    proprietaire: A COMPLETER
+    valide_le: null
+
+  client_perdu:
+    statut: A_COMPLETER
+    libelle: Client perdu
+    definition: >
+      A COMPLETER. Questions à trancher : perdu par rapport à quelle date de référence ?
+      Sur quelle fenêtre d'observation après cette date (6 mois ?) ? Quelle population de départ
+      (clients ayant déjà commandé avant la date de référence) ? Cohérence avec la colonne
+      perdu_6m de clients_churn_snapshot ?
+    formule_sql: A COMPLETER
+    additivite: A COMPLETER
+    tables: []
+    filtres: []
+    date_de_rattachement: A COMPLETER
+    unite: clients
+    pieges: []
+    proprietaire: A COMPLETER
+    valide_le: null
+
+  panier_moyen_ht:
+    statut: A_COMPLETER
+    libelle: Panier moyen HT
+    definition: >
+      A COMPLETER. Questions à trancher : avant ou après retours ? Quelles commandes au dénominateur ?
+      Comment l'écrire à partir des métriques ca_net_ht et nb_commandes ?
+    formule_sql: A COMPLETER
+    additivite: A COMPLETER
+    tables: []
+    filtres: []
+    date_de_rattachement: A COMPLETER
+    unite: euros HT par commande
+    pieges: []
+    proprietaire: A COMPLETER
+    valide_le: null

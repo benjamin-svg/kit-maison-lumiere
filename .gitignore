@@ -1,0 +1,28 @@
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Données générées (relancer donnees/generer_donnees.py)
+donnees/ecommerce.duckdb
+donnees/ecommerce.duckdb.wal
+donnees/brutes/*.csv
+*.duckdb.wal
+
+# Modèles et fichiers lourds produits pendant les exercices
+*.joblib
+*.pkl
+
+# Espaces personnels : analyses, essais et brouillons ne sont pas versionnés,
+# sauf le dossier git/ de l'exercice 01. Pour versionner un travail, le mettre dans projets/ ou semantique/.
+travail/*/*
+!travail/*/git/
+
+# Réglages personnels de Claude Code
+.claude/settings.local.json
+
+# Divers
+.DS_Store
+Thumbs.db

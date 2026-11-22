@@ -1,0 +1,24 @@
+[project]
+name = "stock-boutiques"
+version = "0.1.0"
+description = "Suivi du stock des boutiques de Maison Lumière (dépôt d'atelier, données fictives)"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q -p no:cacheprovider"
+filterwarnings = ["ignore:Using .httpx. with .starlette.testclient. is deprecated"]

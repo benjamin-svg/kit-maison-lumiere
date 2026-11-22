@@ -1,0 +1,14 @@
+boutique,reference,article,stock,seuil_alerte
+Lille,R-1001,Robe plissée en lin,12,4
+Lille,C-2040,Chemise oxford blanche,3,5
+Lille,P-3310,Pull col rond mérinos,0,3
+Lyon,R-1001,Robe plissée en lin,4,4
+Lyon,C-2040,Chemise oxford blanche,9,5
+Lyon,M-9002,Coussin lin lavé,15,6
+Nantes,R-1001,Robe plissée en lin,7,4
+Nantes,P-3310,Pull col rond mérinos,2,3
+Nantes,M-9002,Coussin lin lavé,6,6
+Paris,R-1001,Robe plissée en lin,25,8
+Paris,C-2040,Chemise oxford blanche,11,8
+Paris,P-3310,Pull col rond mérinos,8,8
+Paris,M-9002,Coussin lin lavé,1,6

@@ -1,0 +1,41 @@
+# Pipeline de référence pour un projet Python géré avec uv.
+# À copier à la racine du dépôt sous le nom .gitlab-ci.yml.
+# Chaque job tourne dans un conteneur neuf, sur un « runner » (la machine qui exécute les jobs).
+
+stages:
+  - tests
+  - planifie
+
+variables:
+  UV_CACHE_DIR: "$CI_PROJECT_DIR/.cache/uv"   # garde les paquets téléchargés d'un pipeline à l'autre
+
+default:
+  image: ghcr.io/astral-sh/uv:python3.12-bookworm-slim   # image officielle d'uv, avec Python 3.12
+  cache:
+    key:
+      files: [uv.lock]
+    paths: [.cache/uv]
+
+# Lancé à chaque merge request et à chaque commit sur main.
+tests:
+  stage: tests
+  script:
+    - uv sync --frozen            # installe exactement les versions de uv.lock
+    - uv run pytest --junitxml=rapport-tests.xml
+  artifacts:
+    when: always
+    reports:
+      junit: rapport-tests.xml    # GitLab affiche le détail des tests dans la merge request
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"
+
+# Lancé seulement par un pipeline planifié (Build > Pipeline schedules), par exemple chaque lundi à 6 h.
+# Exemple : un script qui tourne sans Claude (prévision de la semaine, contrôle quotidien des données...).
+traitement-planifie:
+  stage: planifie
+  script:
+    - uv sync --frozen
+    - uv run python -c "print('Remplacez cette ligne par votre script, par exemple : uv run python prevoir_hebdo.py --date-origine $(date +%F)')"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
