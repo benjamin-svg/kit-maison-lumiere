@@ -71,8 +71,8 @@ Dans les deux cas, commencez par vous présenter : « Je suis <votre prénom> »
 | 02 | [Du ticket à la merge request](exercices/02-software-factory.md) | 1 h (démonstration de 10 min pour tous) | Maxime |
 | 03 | [Couche sémantique](exercices/03-couche-semantique.md) | 1 h | Céline |
 | 04 | [Prévision des commandes web](exercices/04-ml-prevision.md) | 1 h | Olivier |
-| 05 | [Churn](exercices/05-ml-churn.md) | 1 h | Augustin |
-| 06 | [Cas d'analyse complet](exercices/06-cas-analyse.md) | 1 h 20 | Céline |
+| 05 | [Départs de clients (churn)](exercices/05-ml-churn.md) | 1 h | Augustin |
+| 06 | [Cas d'analyse complet](exercices/06-cas-analyse.md) | 1 h 05 (+ 15 min de bilan) | Céline |
 | 07 | [Construire son usine logicielle](exercices/07-construire-sa-factory.md) | 1 h | Maxime |
 | 08 | [La chaîne sur un vrai GitLab](exercices/08-gitlab-pour-de-vrai.md) | 1 h | Maxime |
 
@@ -84,9 +84,9 @@ Les 3 h 15 de parcours, après le tronc commun (les étapes « en autonomie » d
 | Qui | Déroulé |
 |---|---|
 | Maxime | 02 (1 h), 07 (1 h), 08 (1 h), bilan (15 min) |
-| Céline | Couche sémantique : présentation (55 min) et 03 (1 h), puis 06 (1 h 20) |
-| Olivier | Couche sémantique : présentation (55 min), méthode ML (1 h 05), 04 (1 h), bilan (15 min) |
-| Augustin | Couche sémantique : présentation (55 min), méthode ML (1 h 05), 05 (1 h), bilan (15 min) |
+| Céline | Couche sémantique : présentation (55 min) et 03 (1 h), puis 06 (1 h 05), bilan (15 min) |
+| Olivier | Couche sémantique : présentation (55 min), apprentissage automatique (1 h 05), 04 (1 h), bilan (15 min) |
+| Augustin | Couche sémantique : présentation (55 min), apprentissage automatique (1 h 05), 05 (1 h), bilan (15 min) |
 
 Chaque consigne donne l'objectif, la durée, le texte exact à donner à Claude, ce qu'il faut observer,
 comment vérifier le résultat (avec les chiffres ou les ordres de grandeur attendus), et une piste pour aller

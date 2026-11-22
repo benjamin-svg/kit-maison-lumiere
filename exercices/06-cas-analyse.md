@@ -10,9 +10,9 @@ Prérequis : l'exercice 03 (fiches `commandes_jour` et `clients`, métriques `cl
 
 ## Durée
 
-1 h 20 (parcours de Céline) : étapes 1, 2 et 4 (1 h 15), puis 5 min de bilan. Les étapes 3 et 5 se font en autonomie.
+1 h 20 (parcours de Céline) : étapes 1, 2 et 4 (1 h 05), puis 15 min de bilan. Les étapes 3 et 5 se font en autonomie.
 
-## Étape 1 - Le bilan d'une opération (25 min)
+## Étape 1 - Le bilan d'une opération (20 min)
 
 > « /analyse Fais le bilan des soldes d'été 2025 comparés à ceux de 2024 : chiffre d'affaires net HT, nombre de commandes et panier moyen, par canal et au total. Puis donne les familles de produits qui progressent le plus et celles qui reculent. Prends les dates dans le calendrier commercial. »
 
@@ -23,7 +23,7 @@ Prérequis : l'exercice 03 (fiches `commandes_jour` et `clients`, métriques `cl
 - Une famille recule nettement : laquelle, et qu'en dire sans aller trop loin ?
 - Contrôles : la somme des canaux égale le total ; le total est recoupé avec `commandes_jour` (et l'écart, expliqué).
 
-## Étape 2 - L'e-mail a-t-il fait acheter ? (35 min)
+## Étape 2 - L'e-mail a-t-il fait acheter ? (30 min)
 
 Le marketing demande : « Notre e-mail de la vente privée d'octobre 2025 a-t-il fait acheter ? »
 
@@ -69,7 +69,7 @@ autrement, et l'on commence toujours par un `--dry_run`. Comparez avec `modeles/
 `modeles/bigquery/claude/skills/analyse-bigquery/SKILL.md` : ce sont les fichiers à copier dans votre dépôt lundi
 (le mode d'emploi de la copie est dans `modeles/bigquery/LISEZMOI.md`).
 
-## Bilan (5 min)
+## Bilan (15 min)
 
 Notez dans `travail/<prénom>/bilan.md` : les trois questions que vous poserez lundi sur les vraies données,
 les tables dont vous aurez besoin, et ce qu'il faut demander avant (voir `lundi/a-demander.md`).
