@@ -23,6 +23,8 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
 BRUTES = (RACINE / "donnees" / "brutes").resolve()
+# Les worktrees de l'exercice 02 (.worktrees/<ticket>/) sont des copies du kit : mêmes interdits.
+WORKTREES = (RACINE / ".worktrees").resolve()
 MOTIF_BRUTES = r"donnees[/\\]+brutes"
 
 
@@ -45,7 +47,14 @@ def dans_brutes(chemin: str, cwd: str) -> bool:
         p = p.resolve()
     except OSError:
         return False
-    return p == BRUTES or BRUTES in p.parents
+    return any(p == b or b in p.parents for b in (BRUTES, *[r / "donnees" / "brutes" for r in copies()]))
+
+
+def copies() -> list[Path]:
+    """Les dossiers des worktrees, s'il y en a."""
+    if not WORKTREES.is_dir():
+        return []
+    return [d.resolve() for d in WORKTREES.iterdir() if d.is_dir()]
 
 
 def segments(commande: str) -> list[list[str]]:
@@ -129,11 +138,12 @@ def chemin_interdit_en_lecture(chemin: str, cwd: str) -> str | None:
         p = p.resolve()
     except OSError:
         return None
-    exercices = (RACINE / "exercices").resolve()
-    if p == exercices or exercices in p.parents:
-        return MESSAGE_EXERCICES
-    if p == (RACINE / "donnees" / "generer_donnees.py").resolve():
-        return MESSAGE_GENERATEUR
+    for racine in (RACINE.resolve(), *copies()):
+        exercices = racine / "exercices"
+        if p == exercices or exercices in p.parents:
+            return MESSAGE_EXERCICES
+        if p == racine / "donnees" / "generer_donnees.py":
+            return MESSAGE_GENERATEUR
     return None
 
 

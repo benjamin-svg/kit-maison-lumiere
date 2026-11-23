@@ -54,21 +54,21 @@ Dans les deux cas, commencez par vous présenter : « Je suis <votre prénom> »
 | `PRATIQUES.md` | Les pratiques de chaque métier sur lesquelles reposent les skills et les sous-agents |
 | `donnees/` | Le script de génération, la base `ecommerce.duckdb` et les CSV de `brutes/` (lecture seule) |
 | `semantique/` | La couche sémantique, volontairement incomplète : fiches des tables, métriques |
-| `outils/` | `requete.py` (SQL en lecture seule), `tester_hooks.py` (contrôle des garde-fous) |
+| `outils/` | `requete.py` (SQL en lecture seule), `tester_hooks.py` (contrôle des garde-fous), `depot_distant.py` et `simuler_collegue.py` (exercice 02) |
 | `projets/portail/` | Petite application d'intranet (FastAPI), ses tests et ses tickets |
 | `exercices/` | Les consignes des exercices (pour vous : Claude n'a pas le droit de les lire) |
 | `modeles/` | Points de départ à copier hors du kit : dépôt d'atelier, usine logicielle, BigQuery |
 | `lundi/` | Refaire le travail sur les vraies données : BigQuery, GitLab, prévision et churn, questions à poser |
 | `travail/` | Un sous-dossier par participant, créé au fil des exercices (non versionné) |
-| `.claude/` | Réglages et hooks, sous-agents (`agents/`), skills (`skills/`) |
+| `.claude/` | Réglages et hooks, sous-agents (`agents/`), skills (`skills/`), règles par sujet (`rules/`) |
 
 ## Plan des exercices
 
 | N° | Exercice | Durée | Pour qui |
 |---|---|---|---|
 | 00 | [Prise en main](exercices/00-prise-en-main.md) | 30 min en salle (+ 20 min en autonomie) | tous |
-| 01 | [Git en local](exercices/01-git.md) | 15 min en salle (+ 25 min en autonomie) | tous |
-| 02 | [Du ticket à la merge request](exercices/02-software-factory.md) | 1 h (démonstration de 10 min pour tous) | Maxime |
+| 01 | [Git avec Claude](exercices/01-git.md) | 15 min en salle (+ 15 min en autonomie) | tous |
+| 02 | [Le cycle d'un ticket avec les skills](exercices/02-software-factory.md) | 17 min en binôme pour tous, puis 1 h | tous, puis Maxime |
 | 03 | [Couche sémantique](exercices/03-couche-semantique.md) | 1 h | Céline |
 | 04 | [Prévision des commandes web](exercices/04-ml-prevision.md) | 1 h | Olivier |
 | 05 | [Départs de clients (churn)](exercices/05-ml-churn.md) | 1 h | Augustin |
@@ -77,13 +77,13 @@ Dans les deux cas, commencez par vous présenter : « Je suis <votre prénom> »
 | 08 | [La chaîne sur un vrai GitLab](exercices/08-gitlab-pour-de-vrai.md) | 1 h | Maxime |
 
 Le tronc commun dure 2 h 45, exercices compris : Claude Code et Desktop (1 h 10, avec l'exercice 00),
-Git et GitLab (50 min, avec l'exercice 01), usine logicielle (45 min, avec la démonstration de l'exercice 02).
+Git et GitLab (50 min, avec l'exercice 01), usine logicielle (45 min, avec les étapes 1 à 5 de l'exercice 02).
 
 Les 3 h 15 de parcours, après le tronc commun (les étapes « en autonomie » de chaque fiche se font après la séance) :
 
 | Qui | Déroulé |
 |---|---|
-| Maxime | 02 (1 h), 07 (1 h), 08 (1 h), bilan (15 min) |
+| Maxime | 02, étapes 6 à 9 (1 h), 07 (1 h), 08 (1 h), bilan (15 min) |
 | Céline | Couche sémantique : présentation (55 min) et 03 (1 h), puis 06 (1 h 05), bilan (15 min) |
 | Olivier | Couche sémantique : présentation (55 min), apprentissage automatique (1 h 05), 04 (1 h), bilan (15 min) |
 | Augustin | Couche sémantique : présentation (55 min), apprentissage automatique (1 h 05), 05 (1 h), bilan (15 min) |
@@ -121,4 +121,8 @@ Les données contiennent volontairement quelques pièges, comme dans la vraie vi
   - pour tous : `claude --version` (les slides citent la version 2.1.283 pour le mode Auto par défaut) ;
   - pour tous : un nom et une adresse pour les commits, sinon git refuse de commiter
     (`git config --global user.name "Prénom Nom"` et `git config --global user.email "adresse"`) ;
+  - pour l'exercice 02 : rien à préparer, `/start-dev` crée le dépôt distant simulé la première fois.
+    Pour gagner du temps, garder sur votre poste une branche T-101 déjà traitée, au cas où Claude serait lent
+    à l'étape 2. Si le kit a déjà un dépôt distant (`origin`, par exemple un vrai GitLab), faire l'exercice dans
+    une copie tirée de l'archive : les scripts refusent de toucher à un vrai GitLab ;
   - avant lundi : envoyer `lundi/a-demander.md` aux personnes concernées dans l'entreprise.

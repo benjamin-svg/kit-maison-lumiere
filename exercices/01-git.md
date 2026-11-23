@@ -1,81 +1,98 @@
-# Exercice 01 - Git en local, et ce que ferait GitLab
+# Exercice 01 : Git avec Claude
 
 ## Objectif
 
-Comprendre les gestes de base de git en les faisant faire par Claude et en les observant : état du dépôt,
-commit, branche, conflit et résolution, historique. Puis relier ces gestes à ce que fait GitLab
-(dépôt partagé, merge request, pipeline de tests).
+Voir Git fonctionner dans le kit, en demandant chaque action à Claude, et lire ce qu'il fait.
+Vous ne tapez aucune commande : vous écrivez vos demandes en français, et vous lisez les commandes qu'il lance.
+
+Ce que vous allez apprendre :
+
+1. Lire l'état d'un dépôt, et comprendre pourquoi certains fichiers ne sont pas suivis.
+2. Faire un commit, et reconnaître les deux étapes : indexer, puis enregistrer.
+3. Provoquer un conflit, le lire, et choisir vous-même la version à garder.
 
 ## Durée
 
-- **En salle, 15 min** : étapes 1 à 3 (ce sont les étapes 01 à 03 de la slide).
-- **En autonomie, 25 min de plus** : étapes 4 et 5, et « Pour aller plus loin ».
+- **En salle, 15 min** : étapes 1 à 3, puis 5 min de mise en commun.
+- **En autonomie, 15 min** : étapes 4 et 5, et « Pour aller plus loin ».
 
-## Vocabulaire
+## Les mots de la partie Git
 
-- **Dépôt** : le dossier suivi par git, avec tout son historique (dans `.git/`).
-- **Commit** : une photo enregistrée de l'état des fichiers, avec un message qui dit pourquoi.
-- **Branche** : une ligne de travail parallèle ; `main` est la branche principale.
-- **Fusion (merge)** : ramener le travail d'une branche dans une autre.
-- **Conflit** : deux branches ont modifié la même ligne ; git ne sait pas choisir et demande à un humain.
-- **Merge request** (GitLab) : la demande, sur le serveur, de fusionner une branche dans `main`, avec relecture
-  et tests automatiques.
+- **Dépôt** : le dossier du projet et son sous-dossier caché `.git`, où Git range les versions.
+- **Index** : la liste de ce qui sera ajouté au prochain commit. `git add` y place un fichier.
+- **Commit** : une version enregistrée de tous les fichiers suivis, avec l'auteur, la date et un message qui dit pourquoi.
+- **Branche** : une suite de commits à part. `main` est la branche de référence, celle qui fonctionne.
+- **Fusion** (merge) : réunir les modifications d'une branche dans une autre.
+- **Conflit** : la même ligne a changé sur les deux branches. Git ne sait pas laquelle garder et attend une décision.
+- **Merge request** (GitLab) : une page qui demande de fusionner une branche dans `main`, montre les
+  modifications et reçoit la relecture.
 
-## Étape 1 - L'état du dépôt (3 min)
+## Étape 1 : l'état du dépôt (3 min)
 
-> « Explique-moi l'état de ce dépôt git : sur quelle branche je suis, les derniers commits, les fichiers modifiés et ceux que git ignore. Pourquoi la base DuckDB et les CSV ne sont-ils pas suivis ? »
+> « Explique-moi l'état de ce dépôt : la branche, les derniers commits, les fichiers modifiés et ceux que Git ignore. Pourquoi la base DuckDB et les CSV ne sont-ils pas suivis ? »
 
-**À observer** : Claude lance `git status`, `git log` et lit `.gitignore`. Les données générées ne sont pas
-versionnées : on versionne le script qui les produit, pas le résultat. Les dossiers `travail/<prénom>/` ne
-le sont pas non plus (brouillons personnels), sauf `travail/<prénom>/git/`, qui sert à cet exercice.
+**À observer** : Claude lance `git status` et `git log`, et lit le fichier `.gitignore`.
 
-Si git ne connaît pas encore votre nom :
+**Pourquoi** : un script produit les données. On garde le script dans le dépôt, pas le résultat, qu'on peut
+toujours recréer. Les dossiers `travail/<prénom>/` ne sont pas suivis non plus (brouillons personnels),
+sauf `travail/<prénom>/git/`, qui sert à cet exercice.
 
-> « Configure git pour ce dépôt seulement avec mon prénom et l'adresse prenom@exemple.fr. »
+Si Git refuse le premier commit parce qu'il ne connaît pas votre nom :
 
-## Étape 2 - Un premier commit (4 min)
+> « Configure Git pour ce dépôt seulement, avec mon prénom et l'adresse prenom@exemple.fr. »
 
-> « Crée le fichier travail/<prénom>/git/ordre-du-jour.md avec un titre et cinq points numérotés pour une réunion d'équipe sur les soldes d'été. Puis fais un commit avec un message clair en français. Montre-moi la commande utilisée. »
+## Étape 2 : un premier commit (4 min)
 
-**À observer** : `git add` (choisir ce qui entre dans le commit) puis `git commit -m "..."`.
+> « Crée le fichier travail/<prénom>/git/ordre-du-jour.md avec un titre et cinq points numérotés pour une réunion d'équipe sur les soldes d'été. Puis fais un commit avec un message clair en français. Montre-moi les commandes utilisées. »
 
-## Étape 3 - Une branche et un conflit volontaire (8 min)
+**À observer** : deux commandes. `git add` place le fichier dans l'index, c'est-à-dire ce qui sera ajouté au
+prochain commit. Puis `git commit -m "..."` enregistre la version.
 
-> « Je veux voir un conflit git. Crée une branche essai/ordre-du-jour, et sur cette branche remplace le point 3 de travail/<prénom>/git/ordre-du-jour.md par "3. Bilan du Black Friday", puis commite. Reviens ensuite sur main, remplace le même point 3 par "3. Préparation des soldes d'hiver", et commite. Enfin, fusionne essai/ordre-du-jour dans main. Arrête-toi au conflit et explique-le-moi sans le résoudre. »
+**Pourquoi** : ce sont les deux étapes d'un commit. On choisit d'abord ce qu'on enregistre, puis on l'enregistre.
+
+## Étape 3 : un conflit (8 min)
+
+Copiez cette demande :
+
+> « Je veux voir un conflit Git. Crée une branche essai/ordre-du-jour. Sur cette branche, remplace le point 3 de travail/<prénom>/git/ordre-du-jour.md par "3. Bilan du Black Friday", puis fais un commit. Reviens sur main, remplace le même point 3 par "3. Préparation des soldes d'hiver", et fais un commit. Enfin, fusionne essai/ordre-du-jour dans main. Arrête-toi au conflit et explique-le-moi sans le résoudre. »
 
 **À observer** :
-- `git switch -c` (ou `git checkout -b`) pour créer la branche, `git switch main` pour revenir ;
-- au moment de `git merge`, git signale un conflit ; le fichier contient des marqueurs
-  `<<<<<<<`, `=======`, `>>>>>>>` qui encadrent les deux versions.
+- `git switch -c essai/ordre-du-jour` crée la branche et s'y place, `git switch main` revient sur main.
+- Au moment de `git merge`, Git signale un conflit. Ouvrez le fichier : les marqueurs `<<<<<<<`, `=======`
+  et `>>>>>>>` entourent les deux versions du point 3.
 
 Puis décidez vous-même :
 
 > « Garde les deux points : "3. Bilan du Black Friday" puis "4. Préparation des soldes d'hiver", renumérote la suite, termine la fusion et montre-moi le résultat. »
 
-**À observer** : la résolution est un choix humain ; Claude l'exécute (`git add` puis `git commit`).
+**À observer** : Claude retire les marqueurs, puis lance `git add` et `git commit` pour terminer la fusion.
 
-## Étape 4 - L'historique (5 min, en autonomie)
+**Pourquoi** : Git ne choisit pas. Le bon choix dépend du contenu : vous décidez, Claude exécute.
+
+## Étape 4 : l'historique (5 min, en autonomie)
 
 > « Montre-moi l'historique sous forme de graphe, avec toutes les branches, et explique chaque ligne. »
 
-**À observer** : `git log --oneline --graph --all` ; le commit de fusion a deux parents.
+**À observer** : `git log --oneline --graph --all`. Le commit de fusion a deux parents : le dernier commit de
+main et le dernier commit de la branche.
 
-## Étape 5 - Et sur GitLab ? (10 min, en autonomie)
+## Étape 5 : et sur GitLab ? (10 min, en autonomie)
 
-> « Si ce dépôt était hébergé sur le GitLab de l'entreprise, explique-moi, étape par étape et sans rien exécuter, ce qui se passerait entre la création de ma branche et la fusion dans main : git push, merge request, pipeline de tests, relecture, fusion. Qu'est-ce qui change par rapport à ce que nous venons de faire en local ? »
+> « Si ce dépôt était sur le GitLab de l'entreprise, explique-moi, étape par étape et sans rien exécuter, ce qui se passerait entre la création de ma branche et la fusion dans main : git push, merge request, relecture, vérifications automatiques, fusion. Qu'est-ce qui change par rapport à ce que nous venons de faire ? »
 
-**À observer** : en local, vous avez fusionné seul(e) ; sur GitLab, la fusion passe par une merge request :
-une page qui montre les différences, lance automatiquement les tests (pipeline), recueille la relecture
-d'un collègue, et garde une trace de la décision. Les exercices suivants reproduisent cette chaîne en local.
+**À observer** : ici, vous avez fusionné seul. Sur GitLab, la fusion passe par une merge request : une page qui
+montre les modifications, relance les vérifications automatiques, reçoit la relecture d'un collègue et garde
+une trace de la décision. L'exercice 02 refait ce cycle avec un dépôt distant qui joue le rôle de GitLab.
 
 ## Comment vérifier
 
 - `git log --oneline --graph --all` montre la branche `essai/ordre-du-jour` et un commit de fusion.
 - `travail/<prénom>/git/ordre-du-jour.md` ne contient plus aucun marqueur de conflit.
-- `git status` est propre (le dossier `travail/` n'est pas suivi, sauf `travail/<prénom>/git/`, commité).
+- `git status` n'affiche aucune modification en attente.
 
 ## Pour aller plus loin
 
-- Demandez à Claude d'annuler le dernier commit **sans perdre les modifications** (`git reset --soft HEAD~1`),
-  puis de le refaire, en expliquant la différence avec `git revert`.
-- Demandez-lui de créer un « tag » `v1.0-formation` et d'expliquer à quoi servent les tags dans une livraison.
+- Demandez à Claude d'annuler le commit de fusion avec `git revert`, puis expliquez pourquoi l'historique
+  garde les deux commits.
+- Demandez-lui de créer un deuxième dossier de travail sur une autre branche, avec `git worktree add`, et
+  d'expliquer à quoi cela sert quand deux sessions de Claude travaillent en même temps.

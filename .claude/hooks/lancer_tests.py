@@ -15,22 +15,31 @@ import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-PROJETS = (RACINE / "projets").resolve()
 
 
 def projet_concerne(chemin: str, cwd: str) -> Path | None:
+    """Le dossier projets/<nom>/ du fichier modifié, dans le kit ou dans un worktree (.worktrees/<ticket>/)."""
     p = Path(chemin)
     if not p.is_absolute():
         p = Path(cwd) / p
     p = p.resolve()
-    if p.suffix != ".py" or PROJETS not in p.parents:
+    if p.suffix != ".py":
         return None
-    return PROJETS / p.relative_to(PROJETS).parts[0]
+    racines = [RACINE.resolve()]
+    worktrees = RACINE / ".worktrees"
+    if worktrees.is_dir():
+        racines += [d.resolve() for d in worktrees.iterdir() if d.is_dir()]
+    for racine in sorted(racines, key=lambda r: len(r.parts), reverse=True):
+        projets = racine / "projets"
+        if projets in p.parents:
+            return projets / p.relative_to(projets).parts[0]
+    return None
 
 
 def contient_des_tests(projet: Path) -> bool:
     for f in projet.rglob("*.py"):
-        if any(part.startswith(".") or part in {"__pycache__", "node_modules"} for part in f.parts):
+        if any(part.startswith(".") or part in {"__pycache__", "node_modules"}
+               for part in f.relative_to(projet).parts):
             continue
         if f.name.startswith("test_") or f.name.endswith("_test.py"):
             return True
@@ -62,7 +71,7 @@ def main() -> None:
     resume = next((l for l in reversed(lignes_pytest)
                    if any(m in l for m in ("passed", "failed", "error", "no tests"))),
                   lignes_pytest[-1] if lignes_pytest else "")
-    nom = projet.relative_to(RACINE).as_posix()
+    nom = projet.relative_to(RACINE.resolve()).as_posix()
 
     if r.returncode in (0, 5):  # 5 = aucun test collecté
         print(json.dumps({"hookSpecificOutput": {

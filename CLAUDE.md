@@ -19,6 +19,8 @@ de la personne, demande-le une fois au début : il sert à choisir son dossier `
 - `semantique/` : la couche sémantique (fiches des tables, définitions des métriques). À lire avant tout SQL.
 - `outils/requete.py` : exécute une requête SQL en lecture seule sur la base.
 - `outils/tester_hooks.py` : vérifie que les garde-fous fonctionnent.
+- `outils/depot_distant.py` et `outils/simuler_collegue.py` : le dépôt distant simulé de l'exercice 02
+  (il joue le rôle de GitLab) et un collègue qui y fusionne une correction.
 - `projets/portail/` : petite application web d'intranet (FastAPI) pour les exercices sur l'usine logicielle.
 - `projets/` : les projets industrialisés (un dossier par projet, avec ses tests).
 - `exercices/` : les consignes des exercices, de `00` à `08`. **Elles sont pour le participant, pas pour toi** :
@@ -69,7 +71,10 @@ Tables de la base : `produits`, `clients`, `commandes`, `lignes_commande`, `emai
 ## Outils du kit dans `.claude/`
 
 - Skills (commandes `/nom`) : `/documenter-table`, `/analyse`, `/modeliser`, `/valider-modele`,
-  `/expliquer`, `/recette`, `/ticket-vers-merge-request`.
+  `/expliquer`, `/recette`, `/ticket-vers-merge-request`, et le cycle d'un ticket :
+  `/start-dev` (branche et worktree dans `.worktrees/<ticket>/`), `/sync-dev` (mise à jour avec le dépôt
+  distant), `/close-dev` (tests, relecture, merge request, sans fusion).
+- Règles par sujet (`.claude/rules/`) : `sql.md`, lue seulement quand un fichier `.sql` est ouvert.
 - Sous-agents : `verificateur` (recalcule un chiffre par un autre chemin), `auditeur-fuite` (cherche
   les fuites de données dans un modèle), `relecteur` (relit une branche comme une merge request).
 - Hooks : refus des écritures dans `donnees/brutes/`, de `rm -rf` et de la lecture de `exercices/` ;

@@ -26,3 +26,7 @@ travail/*/*
 # Divers
 .DS_Store
 Thumbs.db
+
+# Exercice 02 : dépôt distant simulé (joue le rôle de GitLab) et worktrees des tickets
+.depot-distant/
+.worktrees/
