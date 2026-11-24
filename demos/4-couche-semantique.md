@@ -14,7 +14,7 @@ les indicateurs (`metriques.yml`).
 À voir : il lit la fiche de la table `clients`, écrit la requête, la lance avec `outils/requete.py`, et annonce
 ses contrôles (nombre de lignes, valeurs vides, total).
 
-## 2. La même question, sans puis avec les définitions
+## 2. La même question, d'abord sans les définitions, puis avec
 
 Tapez `/clear`, puis :
 

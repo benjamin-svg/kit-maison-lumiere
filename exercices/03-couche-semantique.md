@@ -2,8 +2,9 @@
 
 ## Objectif
 
-Constater, chiffres à l'appui, ce que change une couche sémantique : la même question posée sans puis avec
-`semantique/` ne donne pas le même chiffre. Puis enrichir cette couche (deux fiches de tables, trois métriques)
+Constater, chiffres à l'appui, ce que change une couche sémantique. On pose deux fois la même question à
+Claude : d'abord en lui interdisant de lire `semantique/`, puis en le laissant le lire. Les deux chiffres
+ne sont pas les mêmes. Puis enrichir cette couche (deux fiches de tables, trois métriques)
 et s'en servir pour répondre à trois questions métier avec la skill `/analyse`.
 
 ## Durée
@@ -17,7 +18,7 @@ La **couche sémantique** dit ce que veulent dire les données : le rôle de cha
 (ce que représente une ligne), ses jointures, ses pièges, et la définition unique de chaque indicateur.
 Ici, c'est un dossier de fichiers texte (`semantique/`), relu et versionné comme du code.
 
-## Étape 1 - La même question, sans puis avec la couche sémantique (15 min)
+## Étape 1 - La même question, d'abord sans la couche sémantique, puis avec (15 min)
 
 Vérifiez d'abord que votre `CLAUDE.md` ne contient pas la définition du chiffre d'affaires (si vous avez
 accepté une proposition de `/init` à l'exercice 00) :
