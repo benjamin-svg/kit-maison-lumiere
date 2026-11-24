@@ -28,8 +28,7 @@ de la personne, demande-le une fois au début : il sert à choisir son dossier `
   ne les lis pas (un hook le refuse). Le participant te donne la consigne.
 - `travail/<prénom>/` : l'espace de travail de chaque participant (analyses, brouillons, modèles).
   Non versionné, sauf `travail/<prénom>/git/` (démonstration 2 et exercice 01).
-- `modeles/` : des points de départ à copier hors du kit (dépôt d'atelier, usine logicielle, BigQuery).
-- `lundi/` : les fiches pour refaire le travail sur les vraies données (BigQuery, GitLab).
+- `modeles/` : les points de départ des exercices 07 et 08 (dépôt d'atelier, usine logicielle).
 - `GLOSSAIRE.md` : les mots techniques du kit, expliqués avec un exemple.
 - `.claude/` : réglages, hooks (garde-fous), sous-agents et skills du kit.
 

@@ -65,5 +65,5 @@ nom_de_la_metrique:
 - Une fiche ou une métrique au statut `BROUILLON` ne doit pas servir à un chiffre diffusé.
 - Avant de valider une modification de `metriques.yml`, la faire relire par le sous-agent `relecteur`
   (chiffres des pièges recalculés, formule exécutée).
-- Les formules sont écrites en SQL DuckDB. Sur BigQuery, la syntaxe change : voir `lundi/bigquery.md`.
+- Les formules sont écrites en SQL DuckDB. Sur BigQuery, la syntaxe change : demander à Claude de traduire la requête et de lister chaque différence.
 - Quand une analyse révèle un nouveau piège, on l'ajoute à la fiche concernée.

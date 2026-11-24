@@ -58,21 +58,17 @@ Puis :
 
 > « Demande au sous-agent relecteur de relire cette note comme le ferait la responsable marketing : un chiffre est-il faux, ambigu ou sans source ? »
 
-## Étape 5 - Préparer lundi : la même requête sur BigQuery (15 min, en autonomie)
+## Étape 5 - La même requête sur BigQuery (15 min, en autonomie)
 
-Lisez `lundi/bigquery.md` (coût, `--dry_run`, plafond, syntaxe). Puis :
-
-> « Lis lundi/bigquery.md. Réécris en SQL BigQuery la requête de mon bilan des soldes d'été 2025 (dans travail/<prénom>/analyses/), avec des noms de tables complets de la forme `projet.dataset.table` (invente-les, en le disant), et liste chaque différence de syntaxe avec la version DuckDB. Dis-moi aussi quelle commande bq je lancerais d'abord pour connaître le coût, sans rien exécuter. »
+> « Réécris en SQL BigQuery la requête de mon bilan des soldes d'été 2025 (dans travail/<prénom>/analyses/), avec des noms de tables complets de la forme `projet.dataset.table` (invente-les, en le disant), et liste chaque différence de syntaxe avec la version DuckDB. Dis-moi aussi quelle commande bq je lancerais d'abord pour connaître le coût, sans rien exécuter. »
 
 **À observer** : `COUNT(*) FILTER (WHERE ...)` devient `COUNTIF(...)`, les intervalles de dates s'écrivent
-autrement, et l'on commence toujours par un `--dry_run`. Comparez avec `modeles/bigquery/CLAUDE.modele.md` et
-`modeles/bigquery/claude/skills/analyse-bigquery/SKILL.md` : ce sont les fichiers à copier dans votre dépôt lundi
-(le mode d'emploi de la copie est dans `modeles/bigquery/LISEZMOI.md`).
+autrement, et l'on commence toujours par un `--dry_run` (BigQuery annonce le volume lu, sans rien facturer).
 
 ## Bilan (15 min)
 
 Notez dans `travail/<prénom>/bilan.md` : les trois questions que vous poserez lundi sur les vraies données,
-les tables dont vous aurez besoin, et ce qu'il faut demander avant (voir `lundi/a-demander.md`).
+les tables dont vous aurez besoin, et ce qu'il faut demander avant (droits, noms des tables, propriétaires des indicateurs).
 
 ## Comment vérifier
 

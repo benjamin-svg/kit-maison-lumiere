@@ -93,7 +93,7 @@ Lancez le script pour deux lundis différents, puis l'interface (`uv run streaml
 et l'API (`uv run uvicorn ...`).
 
 **À observer** : à chaque fichier Python modifié sous `projets/prevision/`, le hook relance les tests.
-Le script est ce qui tournera chaque lundi dans un pipeline GitLab planifié, sans Claude (voir `lundi/gitlab.md`).
+Le script est ce qui tournera chaque lundi dans un pipeline GitLab planifié, sans Claude.
 L'API et l'interface servent à consulter le résultat.
 
 ## Comment vérifier
@@ -110,6 +110,5 @@ L'API et l'interface servent à consulter le résultat.
 - `/expliquer projets/prevision` : lisez `EXPLICATION.md` et répondez aux trois questions de contrôle.
 - Ajoutez une fourchette (intervalle de prévision à 80 %, tirée des erreurs du backtest, par horizon) et affichez-la
   dans Streamlit. Puis vérifiez sur la période de note : le réel tombe-t-il dedans 8 fois sur 10 ?
-- Préparez lundi : lisez `lundi/ml-bigquery.md` et demandez à Claude de traduire votre requête de série
-  hebdomadaire en SQL BigQuery (semaines ISO), puis d'écrire le `CREATE MODEL` ARIMA_PLUS_XREG qui servirait
-  de méthode concurrente.
+- Demandez à Claude de traduire votre requête de série hebdomadaire en SQL BigQuery (semaines ISO), puis
+  d'écrire le `CREATE MODEL` ARIMA_PLUS_XREG qui servirait de méthode concurrente.

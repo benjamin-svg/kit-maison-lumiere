@@ -58,8 +58,7 @@ Dans les deux cas, commencez par vous présenter : « Je suis <votre prénom> »
 | `projets/portail/` | Petite application d'intranet (FastAPI), ses tests et ses tickets |
 | `demos/` | Le parcours rapide : 5 démonstrations, une par partie, avec le lien vers votre cas d'usage |
 | `exercices/` | Les exercices complets, 00 à 08 (pour vous : Claude n'a pas le droit de les lire) |
-| `modeles/` | Points de départ à copier hors du kit : dépôt d'atelier, usine logicielle, BigQuery |
-| `lundi/` | Refaire le travail sur les vraies données : BigQuery, GitLab, prévision et churn, questions à poser |
+| `modeles/` | Les points de départ des exercices 07 et 08 : dépôt d'atelier, usine logicielle |
 | `travail/` | Un sous-dossier par participant, créé au fil des démonstrations et des exercices (non versionné) |
 | `.claude/` | Réglages et hooks, sous-agents (`agents/`), skills (`skills/`), règles par sujet (`rules/`) |
 
@@ -106,8 +105,7 @@ Entre parenthèses : les étapes « en autonomie », à faire après la séance.
 
 On peut mélanger : par exemple le parcours rapide pour Claude Code et Git, puis l'exercice complet de sa partie.
 Chaque consigne d'exercice donne l'objectif, la durée, le texte exact à donner à Claude, ce qu'il faut observer,
-comment vérifier le résultat, et une piste pour aller plus loin. Chaque parcours se termine par la fiche
-`lundi/` qui le concerne.
+comment vérifier le résultat, et une piste pour aller plus loin.
 
 ## Les données en bref
 
@@ -143,4 +141,3 @@ Les données contiennent volontairement quelques pièges, comme dans la vraie vi
     copie tirée de l'archive : les scripts refusent de toucher à un vrai GitLab ;
   - pour les cas d'usage : demander à chacun d'apporter un extrait de ses vraies données ou de son vrai
     fichier (anonymisé si besoin), et de savoir où trouver son dépôt GitLab ;
-  - avant lundi : envoyer `lundi/a-demander.md` aux personnes concernées dans l'entreprise.

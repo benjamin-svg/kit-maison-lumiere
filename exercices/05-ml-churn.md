@@ -89,6 +89,6 @@ et on note la photo du jour.
 - `/expliquer travail/<prénom>/churn` pour préparer une présentation au marketing.
 - Construisez six photos mensuelles de 2024 (fin janvier à fin juin), entraînez sur leur réunion et testez sur
   la photo du 30/06/2025. Comment traiter un client présent sur plusieurs photos ?
-- Préparez lundi : `lundi/ml-bigquery.md` donne la photo en SQL BigQuery, `CREATE MODEL`, `ML.EVALUATE` et
-  `ML.PREDICT`, et `lundi/a-demander.md` un modèle de demande au DPO pour figer une photo par mois.
+- Demandez à Claude d'écrire la même photo en SQL BigQuery, puis `CREATE MODEL`, `ML.EVALUATE` et
+  `ML.PREDICT` dans BigQuery ML.
 - Comparez la liste du modèle à celle de la règle : combien de clients en commun ?
