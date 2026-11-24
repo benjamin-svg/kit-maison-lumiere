@@ -1,69 +1,60 @@
 ---
 name: close-dev
-description: Termine le travail sur un ticket - relance tous les tests, fait relire la branche par le sous-agent relecteur et traite ses remarques, fait le dernier commit, envoie la branche, puis prépare la merge request avec sa description. Ne fusionne jamais. Dernière étape du cycle start-dev, sync-dev, close-dev.
-argument-hint: "[identifiant du ticket, facultatif]"
+description: Fait le ménage après la fusion d'un ticket - vérifie que la branche est bien fusionnée dans main, supprime le worktree et la branche locale, efface les fichiers locaux créés pour le ticket (avec accord), met main à jour sur le poste et passe le ticket « Terminé ». Ne fait rien si la branche n'est pas fusionnée. Dernière étape du cycle start-dev, développement, test-dev, sync-dev, verify, ship-dev, close-dev.
+argument-hint: "[identifiant du ticket, par exemple T-101]"
 disable-model-invocation: true
-allowed-tools: Read, Glob, Grep, Write, Bash(git status*), Bash(git diff*), Bash(git log*), Bash(git add*), Bash(git commit*), Bash(git fetch*), Bash(git merge*), Bash(git push*), Bash(git branch*), Bash(git remote*), Bash(git worktree list*), Bash(git rev-parse*), Bash(uv run *), Bash(cd *), Bash(glab mr create*)
+allowed-tools: Read, Glob, Grep, Bash(git status*), Bash(git log*), Bash(git fetch*), Bash(git switch*), Bash(git pull*), Bash(git branch*), Bash(git merge-base*), Bash(git worktree*), Bash(git ls-remote*), Bash(git rev-parse*), Bash(uv run *), Bash(cd *)
 ---
 
-# Terminer un ticket
+# Clore un ticket après la fusion
 
-Ticket : $ARGUMENTS (facultatif). Si le prénom de la personne n'est pas connu, le demander.
+Ticket : $ARGUMENTS (un identifiant comme `T-101`). Si rien n'est donné, lister `git worktree list` et
+demander lequel clore.
 
-Pourquoi cette skill : la personne qui relit trouve tout au même endroit, présenté de la même façon à chaque
-fois. La fusion reste la décision d'une personne : cette skill s'arrête à la merge request.
+Pourquoi cette skill : une fois la merge request fusionnée par une personne, il reste un worktree, une branche
+et parfois des fichiers d'essai sur le poste, et un ticket à ranger. Les laisser encombre le poste et fausse le
+tableau des tickets que voit toute l'équipe.
+
+Toutes les commandes git de cette skill se lancent depuis le **dossier principal du kit**
+(`git rev-parse --path-format=absolute --git-common-dir`, puis son dossier parent), pas depuis le worktree
+qu'on va supprimer.
 
 ## Étapes
 
-1. **Trouver la branche du ticket**, comme dans /sync-dev : `git branch --show-current` doit commencer par
-   `ticket/`. Sinon, aller dans `.worktrees/<identifiant>`. Sinon, demander. Relire le ticket
-   (`projets/*/tickets/<identifiant>-*.md`) et sa liste de critères.
-2. **Relancer toutes les vérifications** : `uv run pytest -q` dans le dossier du projet. Si un test échoue,
-   s'arrêter et le dire. Ne jamais modifier un test existant pour le faire passer.
-3. **Faire relire** : appeler le sous-agent `relecteur` en lui donnant le nom de la branche, le chemin du
-   ticket, et en lui demandant de comparer avec `origin/main` (`git diff origin/main` montre aussi ce qui
-   n'est pas encore commité). Traiter ses remarques « bloquant » et « à corriger », en disant ce que tu changes,
-   puis relancer les tests. Si une remarque change ce que demande le ticket, demander d'abord. Les
-   « suggestions » ne sont pas appliquées : elles vont dans la merge request.
-4. **Faire le dernier commit** : `git add -A`, puis un commit au message clair, en français, au présent,
-   avec l'identifiant (« Ajoute le filtre par famille (T-101) »). Rien à commiter : passer à la suite.
-5. **Se mettre à jour, puis envoyer** : `git fetch origin`. Si `origin/main` a des commits que la branche n'a
-   pas, faire d'abord les étapes 3 à 5 de /sync-dev (fusion de `origin/main`, conflit éventuel, tests).
-   Puis `git push -u origin <branche>`. Jamais `--force`.
-6. **Préparer la merge request** : écrire la description dans le dossier principal du kit (pas dans le
-   worktree, qui sera supprimé) : `travail/<prénom>/merge-requests/<identifiant>.md`.
-
-```markdown
-# <Titre court> (<identifiant>)
-Branche : ticket/<…> → main
-
-## Ce qui change
-## Critères du ticket
-| Critère | Vérification qui le prouve (fichier et nom du test) | Résultat |
-## Vérifications
-(résultat de pytest : nombre de tests, tous réussis)
-## Relecture du sous-agent
-(verdict, remarques traitées, suggestions laissées)
-## Comment tester
-(commande pour lancer le projet, page à ouvrir, valeur à choisir)
-## Risques et retour arrière
-(ce qui pourrait casser ailleurs, et comment annuler : git revert du commit de fusion)
-```
-
-   Si le dépôt distant est un vrai GitLab et que `glab` est installé et connecté, ouvrir aussi la merge request
-   en brouillon : `glab mr create --draft --source-branch <branche> --target-branch main --title "<titre>"
-   --description "$(cat <fichier>)"`. Sinon, le fichier tient lieu de merge request.
-7. **Ne pas fusionner**, ne pas supprimer le worktree. Après la fusion par une personne, le worktree se
-   supprime avec `git worktree remove .worktrees/<identifiant>`.
+1. **Retrouver la branche** : `git branch --list "ticket/<identifiant>-*"`. Aucune : le dire et s'arrêter.
+2. **Vérifier que la fusion a eu lieu** : la merge request (`uv run python outils/merge_request.py`) doit être
+   « Fusionnée ». Puis la preuve par git : `git fetch --prune origin`, puis
+   `git merge-base --is-ancestor <branche> origin/main`.
+   - Code de retour différent de 0 : la branche n'est pas (ou pas entièrement) dans `main` sur le dépôt
+     distant. S'arrêter, montrer les commits manquants (`git log --oneline origin/main..<branche>`) et
+     rappeler que la fusion se fait par la personne qui relit
+     (`! uv run python outils/merge_request.py fusionner <identifiant>`). Ne rien supprimer.
+3. **Vérifier qu'il ne reste rien dans le worktree** : `git -C .worktrees/<identifiant> status --short`.
+   Une modification non enregistrée : la montrer et demander quoi en faire. Ne rien jeter sans accord.
+4. **Supprimer le worktree** : `git worktree remove .worktrees/<identifiant>`. Jamais `--force` sans accord.
+5. **Mettre main à jour sur le poste** : `git switch main`, puis `git pull --ff-only origin main`.
+6. **Supprimer la branche locale** : `git branch -d <branche>`. Jamais `-D` : si git refuse, c'est qu'un
+   commit n'est pas dans `main`, s'arrêter et le dire. Si la branche existe encore sur le dépôt distant
+   (`git ls-remote --heads origin <branche>`), le signaler : sur GitLab, on la supprime en cochant « Delete
+   source branch » au moment de la fusion (`merge_request.py fusionner` le fait dans le kit).
+7. **Fichiers locaux créés pour le ticket** : chercher dans `travail/<prénom>/` les fichiers dont le nom
+   contient l'identifiant, ainsi que les exports d'essai cités dans la merge request. La merge request reste
+   sur le dépôt distant, comme trace. Montrer la liste et demander avant d'effacer. Rien trouvé : le dire.
+8. **Passer le ticket « Terminé »** : `uv run python outils/tableau.py <identifiant> "Terminé"`
+   (sur Jira : la page du ticket, si aucune règle ne le fait déjà à la fusion).
+9. **Vérifier l'état final** : `git status --short` propre, `git worktree list` sans le ticket, et les tests du
+   projet sur `main` : `uv run pytest -q` dans `projets/<projet>/`.
 
 ## Ce que tu affiches à la fin
 
 ```
-Ticket <identifiant> terminé, prêt pour la relecture.
-✓ Vérifications : <résultat de pytest>
-✓ Relecture : <verdict> (<n> remarques traitées)
-✓ Dernier commit : <message>
-✓ Branche envoyée : ticket/<…>
-✓ Merge request : travail/<prénom>/merge-requests/<identifiant>.md
-Je ne fusionne pas : c'est la décision de la personne qui relit.
+Ticket <identifiant> clos.
+✓ Branche fusionnée dans main sur le dépôt distant (GitLab).
+✓ Worktree supprimé : .worktrees/<identifiant>
+✓ main à jour sur le poste, tests : <résultat de pytest>
+✓ Branche locale supprimée : ticket/<…>
+✓ Fichiers locaux : <effacés, gardés, ou aucun>
+✓ Tableau : <identifiant> terminé
 ```
+
+Ne fusionne rien, ne modifie aucun fichier du projet.

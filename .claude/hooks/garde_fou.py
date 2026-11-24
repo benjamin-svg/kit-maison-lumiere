@@ -5,7 +5,8 @@ Refuse :
   - toute commande « rm » à la fois récursive et forcée (rm -rf, rm -fr, rm -r -f, rm --recursive --force...) ;
   - toute lecture des fiches d'exercice (exercices/) : elles sont pour le participant, pas pour Claude ;
   - toute lecture du script de génération des données (sur les vraies données, il n'existe pas) ;
-    le lancer reste permis.
+    le lancer reste permis ;
+  - la fusion d'une merge request (outils/merge_request.py fusionner) : c'est la personne qui relit qui la lance.
 
 Entrée : le JSON envoyé par Claude Code sur l'entrée standard.
 Sortie : un JSON « permissionDecision: deny » si l'action est refusée, rien sinon.
@@ -177,6 +178,9 @@ def main() -> None:
             refuser("Refusé par le garde-fou de la formation : cette commande semble modifier donnees/brutes/, "
                     "qui est en lecture seule. Lire ces fichiers est permis ; pour les transformer, "
                     "écrivez le résultat dans travail/<prénom>/.")
+        if re.search(r"merge_request\.py\b[^;|&\n]*\bfusionner\b", commande):
+            refuser("Refusé par le garde-fou de la formation : fusionner une merge request est la décision de la "
+                    "personne qui relit. Elle tape elle-même : ! uv run python outils/merge_request.py fusionner <ticket>")
         if "corrige-formateur" in commande:
             refuser("Refusé : le corrigé est réservé au formateur.")
         if re.search(MOTIF_EXERCICES, commande) and not re.match(COMMANDES_PERMISES_EXERCICES, commande):

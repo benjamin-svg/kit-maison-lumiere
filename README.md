@@ -53,8 +53,9 @@ Dans les deux cas, commencez par vous présenter : « Je suis <votre prénom> »
 | `GLOSSAIRE.md` | Les mots techniques du kit, avec un exemple |
 | `PRATIQUES.md` | Les pratiques de chaque métier sur lesquelles reposent les skills et les sous-agents |
 | `donnees/` | Le script de génération, la base `ecommerce.duckdb` et les CSV de `brutes/` (lecture seule) |
+| `agents-docs/` | Les conventions de l'équipe que lisent les skills du cycle d'un ticket : git, GitLab, tests, tickets (Jira) |
 | `semantique/` | La couche sémantique, volontairement incomplète : fiches des tables, métriques |
-| `outils/` | `requete.py` (SQL en lecture seule), `tester_hooks.py` (contrôle des garde-fous), `depot_distant.py` et `simuler_collegue.py` (démonstration 3) |
+| `outils/` | `requete.py` (SQL en lecture seule), `tester_hooks.py` (contrôle des garde-fous), `depot_distant.py`, `simuler_collegue.py`, `merge_request.py` et `tableau.py` (démonstration 3) |
 | `projets/portail/` | Petite application d'intranet (FastAPI), ses tests et ses tickets |
 | `demos/` | Le parcours rapide : 5 démonstrations, une par partie, avec le lien vers votre cas d'usage |
 | `exercices/` | Les exercices complets, 00 à 08 (pour vous : Claude n'a pas le droit de les lire) |

@@ -16,11 +16,14 @@ de la personne, demande-le une fois au début : il sert à choisir son dossier `
 - `donnees/generer_donnees.py` : génère la base et les CSV.
 - `donnees/ecommerce.duckdb` : la base DuckDB (générée, non versionnée).
 - `donnees/brutes/` : les mêmes tables en CSV (générées, non versionnées). **Lecture seule.**
+- `agents-docs/conventions/` : les conventions de l'équipe (git, GitLab, tests, tickets Jira). À lire avant toute
+  action sur une branche, un test, une merge request ou un ticket. Les skills du cycle les lisent d'elles-mêmes.
 - `semantique/` : la couche sémantique (fiches des tables, définitions des métriques). À lire avant tout SQL.
 - `outils/requete.py` : exécute une requête SQL en lecture seule sur la base.
 - `outils/tester_hooks.py` : vérifie que les garde-fous fonctionnent.
-- `outils/depot_distant.py` et `outils/simuler_collegue.py` : le dépôt distant simulé de la démonstration 3
-  (il joue le rôle de GitLab) et un collègue qui y fusionne une correction.
+- `outils/depot_distant.py`, `outils/merge_request.py`, `outils/tableau.py` et `outils/simuler_collegue.py` : le
+  dépôt distant simulé de la démonstration 3 (il joue le rôle de GitLab), ses merge requests, le tableau des
+  tickets (il joue le rôle de Jira) et un collègue qui fusionne une correction dans main.
 - `projets/portail/` : petite application web d'intranet (FastAPI) pour la démonstration et les exercices sur l'usine logicielle.
 - `projets/` : les projets industrialisés (un dossier par projet, avec ses tests).
 - `demos/` : le parcours rapide, 5 démonstrations, une par partie de la formation. Tu peux les lire.
@@ -53,7 +56,9 @@ Tables de la base : `produits`, `clients`, `commandes`, `lignes_commande`, `emai
    script de génération n'existe pas sur les vraies données. Documenter les tables à partir des données.
    Le lancer (`uv run python donnees/generer_donnees.py`) reste permis.
 8. Avant une tâche de plus de quelques minutes, proposer un plan et attendre l'accord.
-9. **Les définitions des métriques vivent dans `semantique/` seulement.** Ne pas les recopier dans ce fichier
+9. **Ne fusionne jamais une merge request ni une branche dans `main`** : c'est la décision de la personne qui
+   relit (elle tape `! uv run python outils/merge_request.py fusionner <ticket>`). Un hook le refuse.
+10. **Les définitions des métriques vivent dans `semantique/` seulement.** Ne pas les recopier dans ce fichier
    (même si `/init` le propose) : deux copies d'une définition finissent par se contredire.
 
 ## Commandes utiles
@@ -72,13 +77,18 @@ Tables de la base : `produits`, `clients`, `commandes`, `lignes_commande`, `emai
 
 - Skills (commandes `/nom`) : `/documenter-table`, `/analyse`, `/entrainer-modele` (une phrase devient un
   script qui entraîne un modèle), `/modeliser`, `/valider-modele`,
-  `/expliquer`, `/recette`, `/ticket-vers-merge-request`, et le cycle d'un ticket :
-  `/start-dev` (branche et worktree dans `.worktrees/<ticket>/`), `/sync-dev` (mise à jour avec le dépôt
-  distant), `/close-dev` (tests, relecture, merge request, sans fusion).
+  `/expliquer`, `/recette`, `/ticket-vers-merge-request` (tout le cycle en une commande, sans dépôt distant),
+  `/setup-agents-doc` (écrit `agents-docs/conventions/`), et le cycle d'un ticket :
+  `/start-dev` (branche, worktree dans `.worktrees/<ticket>/`, merge request en brouillon), développement,
+  `/test-dev` (un test par critère, puis tous les tests), `/sync-dev` (commit, récupération de main, envoi,
+  mise à jour de la merge request), `/verify` (fournie avec Claude Code), `/ship-dev` (relecture, merge
+  request prête à relire, sans fusion), fusion par la personne qui relit, `/close-dev` (ménage après la
+  fusion). Merge requests : `uv run python outils/merge_request.py`. Tableau : `uv run python outils/tableau.py`.
 - Règles par sujet (`.claude/rules/`) : `sql.md`, lue seulement quand un fichier `.sql` est ouvert.
 - Sous-agents : `verificateur` (recalcule un chiffre par un autre chemin), `auditeur-fuite` (cherche
   les fuites de données dans un modèle), `relecteur` (relit une branche comme une merge request).
-- Hooks : refus des écritures dans `donnees/brutes/`, de `rm -rf` et de la lecture de `exercices/` ;
+- Hooks : refus des écritures dans `donnees/brutes/`, de `rm -rf`, de la lecture de `exercices/` et de la
+  fusion d'une merge request ;
   tests relancés automatiquement quand un fichier Python de `projets/` change. Quand le participant te
   demande explicitement d'essayer une action pour voir le refus du hook, fais une vraie tentative avec
   l'outil normal (pas une simulation) : le hook bloquera, c'est le but de la démonstration. Si l'action

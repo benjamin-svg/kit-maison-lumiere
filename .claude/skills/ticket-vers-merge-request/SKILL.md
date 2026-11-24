@@ -1,6 +1,6 @@
 ---
 name: ticket-vers-merge-request
-description: Mini usine logicielle locale - lit un ticket, vérifie que ses critères sont testables, crée une branche, planifie, code test d'abord par petites étapes, relit son propre diff, fait relire par le sous-agent relecteur, puis prépare la merge request. Suit les pratiques courantes du développement (critères vérifiables, test d'abord, petits changements, relecture). À utiliser pour traiter un ticket d'évolution du portail.
+description: Mini usine logicielle locale - lit un ticket, vérifie que ses critères sont testables, crée une branche, planifie, code test d'abord par petites étapes, relit son propre diff, fait relire par le sous-agent relecteur, puis prépare la merge request. Suit les pratiques courantes du développement (critères vérifiables, test d'abord, petits changements, relecture). Version en une seule commande, sans dépôt distant ni tableau, du cycle /start-dev, test-dev, sync-dev, ship-dev, close-dev (c'est celle que l'on construit à l'exercice 07).
 argument-hint: "[fichier du ticket]"
 disable-model-invocation: true
 ---

@@ -57,6 +57,8 @@ CAS_PRE = [
     ("redirection vers brutes", "Bash", {"command": "echo test > donnees/brutes/produits.csv"}, True),
     ("ajout vers brutes", "Bash", {"command": "cat x.csv >> ./donnees/brutes/clients.csv"}, True),
     ("sed -i sur brutes", "Bash", {"command": "sed -i 's/a/b/' donnees/brutes/produits.csv"}, True),
+    ("fusionner une merge request", "Bash", {"command": "uv run python outils/merge_request.py fusionner T-100"}, True),
+    ("passer une merge request prête (permis)", "Bash", {"command": "uv run python outils/merge_request.py prete T-100"}, False),
     ("mv depuis brutes", "Bash", {"command": "mv donnees/brutes/emails.csv /tmp/"}, True),
     ("cp vers brutes", "Bash", {"command": "cp travail/x.csv donnees/brutes/"}, True),
     ("pandas to_csv vers brutes", "Bash", {"command": "uv run python -c \"import pandas as pd; pd.DataFrame().to_csv('donnees/brutes/x.csv')\""}, True),

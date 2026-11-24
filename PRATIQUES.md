@@ -48,6 +48,8 @@ Lundi, si vous adaptez un outil, gardez ces pratiques : ce sont elles qui renden
 
 | Pratique | Où dans le kit |
 |---|---|
+| Des règles d'équipe écrites (branches, commits, merge requests, tests), que l'agent lit avant d'agir | `agents-docs/conventions/`, écrites par `/setup-agents-doc` |
+| Une merge request ouverte en brouillon dès le début, mise à jour à chaque envoi | `/start-dev`, `/sync-dev`, `/ship-dev` |
 | Un ticket prêt : des critères vérifiables (« étant donné, quand, alors ») | `/ticket-vers-merge-request`, étape 1 |
 | Une demande = une branche ; le plus petit changement, sans hors-sujet | étapes 2 et 3 |
 | Test d'abord : écrire le test, le voir échouer, puis coder | étape 4 ; `/recette`, étape 3 |
