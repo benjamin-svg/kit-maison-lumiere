@@ -1,4 +1,4 @@
-"""Prépare le dépôt distant de l'exercice 02, qui joue le rôle de GitLab.
+"""Prépare le dépôt distant du kit (démonstration 3), qui joue le rôle de GitLab.
 
 Le kit n'a pas de vrai GitLab. Ce script crée, dans le dossier caché `.depot-distant/`, un dépôt
 « nu » (sans fichiers de travail, comme celui d'un serveur), le déclare comme dépôt distant `origin`,
@@ -9,7 +9,7 @@ Usage (depuis le dossier du kit) :
     uv run python outils/depot_distant.py --etat     # affiche seulement l'état
 
 Si le kit a déjà un dépôt distant `origin` (par exemple un vrai GitLab), le script ne change rien :
-l'exercice se fait alors dans une copie du kit tirée de l'archive.
+la démonstration se fait alors dans une copie du kit tirée de l'archive.
 """
 
 from __future__ import annotations
@@ -69,7 +69,7 @@ def main() -> None:
     if url and not est_le_distant_simule(url, racine):
         print(
             f"Ce kit a déjà un dépôt distant : origin = {url}\n"
-            "Je ne change rien. Pour l'exercice 02, utilisez une copie du kit tirée de l'archive :\n"
+            "Je ne change rien. Pour la démonstration 3, utilisez une copie du kit tirée de l'archive :\n"
             "le dépôt distant simulé ne doit pas remplacer un vrai GitLab.",
             file=sys.stderr,
         )
@@ -86,7 +86,7 @@ def main() -> None:
     if not git("ls-remote", "--heads", "origin", "main", cwd=racine).stdout.strip():
         git("push", "--quiet", "-u", "origin", "main", cwd=racine)
         print("Branche main envoyée sur le dépôt distant.")
-    print("Prêt : le dépôt distant joue le rôle de GitLab pour l'exercice 02.")
+    print("Prêt : le dépôt distant joue le rôle de GitLab pour la démonstration 3.")
 
 
 if __name__ == "__main__":

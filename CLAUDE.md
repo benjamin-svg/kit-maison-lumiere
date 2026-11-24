@@ -19,14 +19,15 @@ de la personne, demande-le une fois au début : il sert à choisir son dossier `
 - `semantique/` : la couche sémantique (fiches des tables, définitions des métriques). À lire avant tout SQL.
 - `outils/requete.py` : exécute une requête SQL en lecture seule sur la base.
 - `outils/tester_hooks.py` : vérifie que les garde-fous fonctionnent.
-- `outils/depot_distant.py` et `outils/simuler_collegue.py` : le dépôt distant simulé de l'exercice 02
+- `outils/depot_distant.py` et `outils/simuler_collegue.py` : le dépôt distant simulé de la démonstration 3
   (il joue le rôle de GitLab) et un collègue qui y fusionne une correction.
-- `projets/portail/` : petite application web d'intranet (FastAPI) pour les exercices sur l'usine logicielle.
+- `projets/portail/` : petite application web d'intranet (FastAPI) pour la démonstration et les exercices sur l'usine logicielle.
 - `projets/` : les projets industrialisés (un dossier par projet, avec ses tests).
-- `exercices/` : les consignes des exercices, de `00` à `08`. **Elles sont pour le participant, pas pour toi** :
+- `demos/` : le parcours rapide, 5 démonstrations, une par partie de la formation. Tu peux les lire.
+- `exercices/` : les exercices complets, de `00` à `08`, au choix avec le parcours rapide. **Elles sont pour le participant, pas pour toi** :
   ne les lis pas (un hook le refuse). Le participant te donne la consigne.
 - `travail/<prénom>/` : l'espace de travail de chaque participant (analyses, brouillons, modèles).
-  Non versionné, sauf `travail/<prénom>/git/` (exercice 01).
+  Non versionné, sauf `travail/<prénom>/git/` (démonstration 2 et exercice 01).
 - `modeles/` : des points de départ à copier hors du kit (dépôt d'atelier, usine logicielle, BigQuery).
 - `lundi/` : les fiches pour refaire le travail sur les vraies données (BigQuery, GitLab).
 - `GLOSSAIRE.md` : les mots techniques du kit, expliqués avec un exemple.
@@ -70,7 +71,8 @@ Tables de la base : `produits`, `clients`, `commandes`, `lignes_commande`, `emai
 
 ## Outils du kit dans `.claude/`
 
-- Skills (commandes `/nom`) : `/documenter-table`, `/analyse`, `/modeliser`, `/valider-modele`,
+- Skills (commandes `/nom`) : `/documenter-table`, `/analyse`, `/entrainer-modele` (une phrase devient un
+  script qui entraîne un modèle), `/modeliser`, `/valider-modele`,
   `/expliquer`, `/recette`, `/ticket-vers-merge-request`, et le cycle d'un ticket :
   `/start-dev` (branche et worktree dans `.worktrees/<ticket>/`), `/sync-dev` (mise à jour avec le dépôt
   distant), `/close-dev` (tests, relecture, merge request, sans fusion).

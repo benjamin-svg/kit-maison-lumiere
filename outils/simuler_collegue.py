@@ -1,6 +1,6 @@
 """Simule un collègue qui fait fusionner une petite correction dans main, sur le dépôt distant.
 
-Exercice 02, étape 3. Pendant que vous travaillez sur votre ticket, « Olivier » corrige la page
+Démonstration 3, étape 3. Pendant que vous travaillez sur votre ticket, « Olivier » corrige la page
 d'accueil du portail : il précise la date prévue de l'application de ciblage. Sa correction arrive
 dans `main` sur le dépôt distant. Votre branche ne la contient pas encore : c'est le travail de /sync-dev.
 

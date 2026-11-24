@@ -23,8 +23,8 @@ Toutes les commandes git de cette skill se lancent depuis le **dossier principal
    critères d'acceptation. Si un critère n'est pas vérifiable, le signaler (sans bloquer : on en reparlera
    au moment du plan).
 2. **Vérifier le dépôt distant** : `git remote get-url origin`.
-   - Pas de dépôt distant : lancer `uv run python outils/depot_distant.py`, qui crée le dépôt distant de
-     l'exercice (il joue le rôle de GitLab), et le dire en une phrase.
+   - Pas de dépôt distant : lancer `uv run python outils/depot_distant.py`, qui crée le dépôt distant
+     du kit (il joue le rôle de GitLab), et le dire en une phrase.
    - Si le script refuse (le kit a déjà un autre dépôt distant), s'arrêter et répéter son message.
 3. **Partir d'un état propre** : `git status --short` dans le dossier principal. Le dossier `travail/` n'est pas
    suivi et ne compte pas. S'il reste des modifications, les montrer et demander quoi faire. Ne rien jeter.
